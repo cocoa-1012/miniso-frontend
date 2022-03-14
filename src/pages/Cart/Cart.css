@@ -1,0 +1,12 @@
+.TrashIcon {
+  font-size: 20px;
+  color: #ff0000;
+  cursor: pointer;
+  margin-top: 0px;
+  margin-bottom: 40px;
+}
+
+.TrashIcon:hover {
+  color: #000000;
+  transition: 0.4s;
+}

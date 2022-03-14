@@ -1,0 +1,113 @@
+.logoFooter {
+  width: 150px;
+  height: 150px;
+}
+
+.socialMedia {
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.socialMedia:hover {
+  color: #fe0000;
+  transition: 0.4s;
+}
+
+.paraGraph {
+  font-size: 13.5px;
+}
+
+.category_list li{
+  margin-top: 8x;
+}
+
+.category_list a{
+  color: white;
+  text-decoration: none;
+}
+
+/*MEDIAQUERIES*/
+
+@media only screen and (max-width: 1920px) {
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 1048px) {
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 882px) {
+  .title {
+    font-size: 16px;
+    color: #fff;
+  }
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 645px) {
+  a.link {
+    text-decoration: none;
+    color: #000000;
+    padding-left: 15px;
+  }
+
+  .diBox {
+    background-color: #e71425;
+    color: #fff;
+  }
+
+  .btn {
+    color: #fff;
+  }
+
+  .hamburguer {
+    font-size: 40px;
+    padding-right: 5px;
+    font-weight: 700;
+    color: #fff;
+  }
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .contenitrice {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 405px) {
+  footer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .contenitrice {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+}

@@ -1,0 +1,132 @@
+.header {
+  height: 70px;
+}
+
+.wrapper {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.center {
+  flex: 1;
+  text-align: center;
+}
+
+.logo img {
+  font-weight: bold;
+  height: 55px;
+  width: 55px;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.language {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.searchContainer {
+  border: 0.5px solid lightgray;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  padding: 5px;
+}
+
+.input {
+  border: none;
+  width: 100%;
+}
+
+.MenuItem {
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.link {
+  text-decoration: none;
+  color: #000000;
+}
+
+.specialLinks {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.colorIcons {
+  color: #000000;
+}
+
+.Badge .numberColor {
+  color: #ffffff;
+  background-color: blue;
+}
+
+/*MEDIAQUERIES*/
+
+@media only screen and (max-width: 640px) {
+  .header {
+    height: 50px;
+  }
+
+  .wrapper {
+    padding-top: 3px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .input {
+    width: 50px;
+  }
+
+  .logo img {
+    height: 45px;
+    width: 45px;
+  }
+
+  .right {
+    justify-content: center;
+  }
+
+  .MenuItem {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 985px) {
+  .MenuItem {
+    font-size: 12px;
+  }
+  .right {
+    justify-content: right;
+  }
+}
+
+@media only screen and (max-width: 898px) {
+  .link {
+    display: none;
+  }
+}
