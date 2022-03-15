@@ -287,7 +287,7 @@ const ProductList = () => {
         <Wrapper>
           <br />
           <br />
-          <Title>Lista de Productos</Title>
+
           <p></p>
           <Top>
             {/*<TopButton>CONTINUE SHOPPING</TopButton>*/}
