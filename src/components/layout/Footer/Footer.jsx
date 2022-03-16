@@ -1,6 +1,7 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 //import { Link } from "react-router-dom";
 import './Footer.css';
 
@@ -60,9 +61,9 @@ const Footer = () => {
                 <ul className='category_list'>
                   {categories.map((category) => (
                     <li key={category.codCatUno}>
-                      <a href={`/productoslista/${category.codCatUno}`}>
+                      <Link to={`/productoslista/${category.codCatUno}`}>
                         {category.descripcion}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                   {/* <li>
