@@ -23,10 +23,16 @@
   text-align: center;
 }
 
-.logo img {
+.logo a {
   font-weight: bold;
   height: 55px;
   width: 55px;
+  display: inline-block;
+}
+.logo img {
+  font-weight: bold;
+  height: 100%;
+  width: 100%;
 }
 
 .right {

@@ -7,17 +7,11 @@ import ListItemText from '@mui/material/ListItemText';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
-import {
-  //Routes,
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //import MenuIcon from "@mui/icons-material/Menu";
-//import { Link } from "react-router-dom";
 import classes from './Drawer.module.css';
 
 const Drawer = () => {
-  const history = useHistory();
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open) => (event) => {
     setState(open);
