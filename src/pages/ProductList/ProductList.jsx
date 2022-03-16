@@ -1,10 +1,10 @@
-import { Container } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
-import Products from "../../components/layout/Products/Products";
+import { Container } from '@mui/material';
+import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import Products from '../../components/layout/Products/Products';
 
 const Contenitrice = styled.div``;
 
@@ -245,9 +245,9 @@ const Option = styled.option``;
 
 const ProductList = () => {
   const location = useLocation();
-  const cat = location.pathname.split("/")[2];
+  const cat = location.pathname.split('/')[2];
   const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("newest");
+  const [sort, setSort] = useState('newest');
   let history = useHistory();
 
   const handleFilters = async (event) => {
@@ -256,7 +256,7 @@ const ProductList = () => {
       history.push(`/productoslista/${value}`);
       history.go(`/productoslista/${value}`);
     } catch (err) {
-      console.log("- - - - - err: ", err);
+      console.log('- - - - - err: ', err);
     }
     /*
       setFilters({
@@ -267,19 +267,19 @@ const ProductList = () => {
   };
 
   const [categories, setCategories] = useState([]);
-  let catUrl = "http://3.16.73.177:9080/public/categories/first";
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-  const getCategories = async () => {
+  const getCategories = useCallback(async () => {
+    const catUrl = 'http://3.16.73.177:9080/public/categories/first';
     const res = await axios.get(catUrl, {
       crossDomain: true,
     });
-    console.log("TTT", res.data.body);
+    // console.log('TTT', res.data.body);
     setCategories(res.data.body);
-  };
+  }, []);
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
 
   return (
     <Container>
@@ -293,10 +293,10 @@ const ProductList = () => {
             {/*<TopButton>CONTINUE SHOPPING</TopButton>*/}
             <TopTexts>{/*<TopText>No. Resultados</TopText>*/}</TopTexts>
             <FilterContainerResponsive>
-              <Select1 value={cat} name="categoría" onChange={handleFilters}>
-                {" "}
+              <Select1 value={cat} name='categoría' onChange={handleFilters}>
+                {' '}
                 {categories.map((category) => (
-                  <Option value={category.codCatUno}>
+                  <Option value={category.codCatUno} key={category.codCatUno}>
                     {category.descripcion}
                   </Option>
                 ))}
@@ -312,11 +312,11 @@ const ProductList = () => {
             </FilterContainerResponsive>
             <Sortby>
               <Select2 onChange={(e) => setSort(e.target.value)}>
-                <Option value="newest">Ordenar</Option>
-                <Option Option value="desc">
-                  Precio más alto
+                <Option value='newest'>Ordenar / Newest</Option>
+                <Option Option value='desc'>
+                  Precio más alto / Desc
                 </Option>
-                <Option value="asc">Precio más bajo</Option>
+                <Option value='asc'>Precio más bajo / asc</Option>
               </Select2>
             </Sortby>
           </Top>
@@ -327,10 +327,10 @@ const ProductList = () => {
               <br />
               {/*<Button>Reiniciar</Button>*/}
               <FilterContainer>
-                <Select1 value={cat} name="categoría" onChange={handleFilters}>
-                  {" "}
+                <Select1 value={cat} name='categoría' onChange={handleFilters}>
+                  {' '}
                   {categories.map((category) => (
-                    <Option value={category.codCatUno}>
+                    <Option value={category.codCatUno} key={category.codCatUno}>
                       {category.descripcion}
                     </Option>
                   ))}

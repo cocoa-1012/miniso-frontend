@@ -1,11 +1,124 @@
-import React from "react";
-import styled from "styled-components";
-import Product from "./Product";
-//import { popularProducts } from "../../../data";
-import { useEffect, useState } from "react";
-import CustomPagination from "../Pagination/CustomPagination";
-import axios from "axios";
-import { Container } from "@mui/material";
+import { Container } from '@mui/material';
+import axios from 'axios';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import styled from 'styled-components';
+import CustomPagination from '../Pagination/CustomPagination';
+import Product from './Product';
+
+const Products = ({ cat, filters, sort }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [formateProducts, setFormateProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const getProducts = useCallback(
+    async (currentPage) => {
+      const res = await axios.get(
+        cat
+          ? `http://3.16.73.177:9080/public/products/size/12/page/${currentPage}?category=${cat}`
+          : 'http://3.16.73.177:9080/public/products/size/12/page/0?category=01',
+        {
+          crossDomain: true,
+        }
+      );
+      setProducts(res.data.content);
+    },
+    [cat]
+  );
+
+  useEffect(() => {
+    getProducts(currentPage);
+  }, [currentPage, getProducts]);
+
+  const handlePageChange = (e) => {
+    setCurrentPage(e.target.innerText);
+  };
+
+  useEffect(() => {
+    try {
+      cat &&
+        setFormateProducts(
+          products.filter((item) =>
+            Object.entries(filters).every(([key, value]) =>
+              item[key].includes(value)
+            )
+          )
+        );
+    } catch (err) {}
+  }, [products, cat, filters]);
+
+  useEffect(() => {
+    if (sort === 'asc') {
+      setFilteredProducts((prev) => {
+        const asc = prev.sort((a, b) => {
+          if (a.precio > b.precio) return 1;
+          if (a.precio < b.precio) return -1;
+          return 0;
+        });
+        // console.table(
+        //   'asc',
+        //   asc.map((a) => a.precio)
+        // );
+        return asc;
+      });
+    } else {
+      setFilteredProducts((prev) => {
+        const desc = prev.sort((a, b) => {
+          if (a.precio > b.precio) return -1;
+          if (a.precio < b.precio) return 1;
+          return 0;
+        });
+        // console.table(
+        //   'desc',
+        //   desc.map((a) => a.precio)
+        // );
+        return desc;
+      });
+    }
+  }, [sort, products, filters]);
+
+  const newProducts = useMemo(() => {
+    if (sort === 'asc') {
+      const asc = formateProducts.sort((a, b) => {
+        if (a.precio > b.precio) return 1;
+        if (a.precio < b.precio) return -1;
+        return 0;
+      });
+      return asc;
+    }
+
+    if (sort === 'desc') {
+      const desc = formateProducts.sort((a, b) => {
+        if (a.precio > b.precio) return -1;
+        if (a.precio < b.precio) return 1;
+        return 0;
+      });
+      return desc;
+    }
+
+    return formateProducts;
+  }, [formateProducts, sort]);
+
+  return (
+    <div>
+      <Container>
+        <div>
+          <Contenitrice>
+            {newProducts.map((item) => (
+              <Product item={item} key={Math.random()} />
+            ))}
+          </Contenitrice>
+        </div>
+        <div className='ImpaginAzione'>
+          <CustomPagination
+            handlePageChange={handlePageChange}
+            page={currentPage}
+          />
+        </div>
+      </Container>
+    </div>
+  );
+};
 
 const Contenitrice = styled.div`
   display: grid;
@@ -92,81 +205,5 @@ const Contenitrice = styled.div`
     justify-content: center;
   }
 `;
-
-const Products = ({ cat, filters, sort }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  useEffect(() => {
-    getProducts(currentPage);
-  }, [currentPage]);
-
-  const getProducts = async (currentPage) => {
-    const res = await axios.get(
-      cat
-        ? `http://3.16.73.177:9080/public/products/size/12/page/${currentPage}?category=${cat}`
-        : "http://3.16.73.177:9080/public/products/size/12/page/0?category=01",
-      {
-        crossDomain: true,
-      }
-    );
-    setProducts(res.data.content);
-  };
-
-  const handlePageChange = (e) => {
-    setCurrentPage(e.target.innerText);
-  };
-
-  useEffect(() => {
-    try {
-      cat &&
-        setFilteredProducts(
-          products.filter((item) =>
-            Object.entries(filters).every(([key, value]) =>
-              item[key].includes(value)
-            )
-          )
-        );
-    } catch (err) {}
-  }, [products, cat, filters]);
-
-  useEffect(() => {
-    if (sort === "newest") {
-      //    setFilteredProducts((prev) =>
-      //     [...prev].sort((a, b) => a.createdAt - b.createdAt)
-      //  );
-    } else if (sort === "asc") {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => a.precio - b.precio)
-      );
-    } else {
-      setFilteredProducts((prev) =>
-        [...prev].sort((a, b) => b.precio - a.precio)
-      );
-    }
-  }, [sort]);
-
-  return (
-    <div>
-      <Container>
-        <div>
-          <Contenitrice>
-            {" "}
-            {filteredProducts.map((item) => (
-              <Product item={item} key={item.id} />
-            ))}
-          </Contenitrice>
-        </div>
-        <div className='ImpaginAzione'>
-          <CustomPagination
-            handlePageChange={handlePageChange}
-            page={currentPage}
-          />
-        </div>
-      </Container>
-    </div>
-  );
-};
 
 export default Products;

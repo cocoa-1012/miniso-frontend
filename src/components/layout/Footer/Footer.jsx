@@ -1,17 +1,30 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useCallback, useEffect, useState } from 'react';
 //import { Link } from "react-router-dom";
-import "./Footer.css";
+import './Footer.css';
 
 const Footer = () => {
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = useCallback(() => {
+    axios
+      .get('http://3.16.73.177:9080/public/categories/first')
+      .then((res) => {
+        setCategories(res.data.body);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+  useEffect(() => fetchCategories(), [fetchCategories]);
+
   return (
     <div>
-      <footer className="text-white py-4 bg-dark">
-        <div className="">
-          <div className="container text-left text-md-left">
-            <div className="row">
-              <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 mx-auto">
-                <img className="logoFooter" src="/img/logo.png" alt="" />
+      <footer className='text-white py-4 bg-dark'>
+        <div className=''>
+          <div className='container text-left text-md-left'>
+            <div className='row'>
+              <div className='col-xl-4 col-lg-4 col-md-12 col-sm-12 mx-auto'>
+                <img className='logoFooter' src='/img/logo.png' alt='' />
                 <br />
                 <br />
                 <br />
@@ -39,57 +52,61 @@ const Footer = () => {
                 </ul>
               </div> */}
               {/*END GRID COLUMN*/}
-              <hr className="clearfix w-100 d-md-none" />
-              <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
+              <hr className='clearfix w-100 d-md-none' />
+              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto'>
+                <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                   Categorías
                 </h5>
-                <ul className="category_list">
-                  <li>
-                    <a href="http://localhost:3000/">Compras</a>
+                <ul className='category_list'>
+                  {categories.map((category) => (
+                    <li key={category.codCatUno}>
+                      <a href={`/productoslista/${category.codCatUno}`}>
+                        {category.descripcion}
+                      </a>
+                    </li>
+                  ))}
+                  {/* <li>
+                    <a href='http://localhost:3000/'>Busqueda de dominios</a>
                   </li>
                   <li>
-                    <a href="http://localhost:3000/">Busqueda de dominios</a>
+                    <a href='http://localhost:3000/'>Sitios web</a>
                   </li>
                   <li>
-                    <a href="http://localhost:3000/">Sitios web</a>
+                    <a href='http://localhost:3000/'>WordPress</a>
                   </li>
                   <li>
-                    <a href="http://localhost:3000/">WordPress</a>
-                  </li>
-                  <li>
-                    <a href="http://localhost:3000/">
+                    <a href='http://localhost:3000/'>
                       Seguridad de paginas web
                     </a>
                   </li>
                   <li>
-                    <a href="http://localhost:3000/">
+                    <a href='http://localhost:3000/'>
                       Correo electronico y Office
                     </a>
                   </li>
                   <li>
-                    <a href="http://localhost:3000/">Promociones</a>
-                  </li>
+                    <a href='http://localhost:3000/'>Promociones</a>
+                  </li> */}
                 </ul>
               </div>
-              <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
+              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto'>
+                <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                   Contacto
                 </h5>
                 <p>
-                  <i className="fas fa-map-marker-alt me-3"></i>16 calle 6-72
+                  <i className='fas fa-map-marker-alt me-3'></i>16 calle 6-72
                   zona 10 Centro Comercial La Estación Local N-L22 Primer Nivel.
                 </p>
                 <p>
-                  <i className="fas fa-envelope me-3"></i>
+                  <i className='fas fa-envelope me-3'></i>
                   hola@miniso.com.gt
                 </p>
                 <p>
-                  <i className="fas fa-phone me-3"></i> 2445-5689
+                  <i className='fas fa-phone me-3'></i> 2445-5689
                 </p>
               </div>
               {/*END GRID COLUMN*/}
-              <hr className="clearfix w-100 d-md-none" />
+              <hr className='clearfix w-100 d-md-none' />
               {/*              <div className='col-xl-2 col-lg-2 col-md-12 col-sm-12 mx-auto'>
                 <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                   Mi Cuenta
@@ -124,25 +141,25 @@ const Footer = () => {
           {/*CALL TO ACTION*/}
 
           {/*SOCIAL BUTTONS*/}
-          <ul className="list-unstyled list-inline text-center">
-            <li className="list-inline-item">
+          <ul className='list-unstyled list-inline text-center'>
+            <li className='list-inline-item'>
               <a
-                href="https://www.facebook.com/MinisoGt/"
-                target="_blank"
-                className="btn-floating btn-fb mx-1"
-                rel="noreferrer"
+                href='https://www.facebook.com/MinisoGt/'
+                target='_blank'
+                className='btn-floating btn-fb mx-1'
+                rel='noreferrer'
               >
-                <i className="fab fa-facebook-f socialMedia"></i>
+                <i className='fab fa-facebook-f socialMedia'></i>
               </a>
             </li>
-            <li className="list-inline-item">
+            <li className='list-inline-item'>
               <a
-                href="https://www.instagram.com/miniso.gt/?hl=en"
-                target="_blank"
-                className="btn-floating btn-fb mx-1"
-                rel="noreferrer"
+                href='https://www.instagram.com/miniso.gt/?hl=en'
+                target='_blank'
+                className='btn-floating btn-fb mx-1'
+                rel='noreferrer'
               >
-                <i className="fab fa-instagram socialMedia"> </i>
+                <i className='fab fa-instagram socialMedia'> </i>
               </a>
             </li>
           </ul>
@@ -151,7 +168,7 @@ const Footer = () => {
           {/*COPYRIGHTS*/}
           <br />
           <br />
-          <h5 className="text-center">
+          <h5 className='text-center'>
             MINISO Guatemala Ⓒ {new Date().getFullYear()} Todos los derechos
             reservados.
           </h5>
