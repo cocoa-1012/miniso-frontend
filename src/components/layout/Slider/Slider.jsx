@@ -1,8 +1,53 @@
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import React, { useState } from "react";
-import styled from "styled-components";
-import { sliderItems } from "../../../data";
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { sliderItems } from '../../../data';
+
+const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = useCallback(
+    (direction) => {
+      if (direction === 'left') {
+        setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      } else {
+        setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      }
+    },
+    [slideIndex]
+  );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleClick();
+    }, 1000 * 3);
+    return () => clearInterval(interval);
+  }, [handleClick]);
+
+  return (
+    <Container>
+      <Arrow direction='left' onClick={() => handleClick('left')}>
+        <ArrowBackIosRoundedIcon />
+      </Arrow>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImgContainer>
+              <Image src={item.img} />
+            </ImgContainer>
+            {/*<InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button>DESCUBRE MÁS</Button>
+            </InfoContainer>*/}
+          </Slide>
+        ))}
+      </Wrapper>
+      <Arrow direction='right' onClick={() => handleClick('right')}>
+        <ArrowForwardIosRoundedIcon />
+      </Arrow>
+    </Container>
+  );
+};
 
 const Container = styled.div`
   width: 100%;
@@ -44,8 +89,8 @@ const Arrow = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: ${(props) => props.direction === "left" && "10px"};
-  right: ${(props) => props.direction === "right" && "10px"};
+  left: ${(props) => props.direction === 'left' && '10px'};
+  right: ${(props) => props.direction === 'right' && '10px'};
   margin: auto;
   cursor: pointer;
   z-index: 2;
@@ -133,41 +178,5 @@ const Button = styled.button`
   background-color: transparent;
   cursor: pointer;
 `;*/
-
-const Slider = () => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const handleClick = (direction) => {
-    if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
-    } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
-    }
-  };
-
-  return (
-    <Container>
-      <Arrow direction='left' onClick={() => handleClick("left")}>
-        <ArrowBackIosRoundedIcon />
-      </Arrow>
-      <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
-          <Slide bg={item.bg} key={item.id}>
-            <ImgContainer>
-              <Image src={item.img} />
-            </ImgContainer>
-            {/*<InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              <Button>DESCUBRE MÁS</Button>
-            </InfoContainer>*/}
-          </Slide>
-        ))}
-      </Wrapper>
-      <Arrow direction='right' onClick={() => handleClick("right")}>
-        <ArrowForwardIosRoundedIcon />
-      </Arrow>
-    </Container>
-  );
-};
 
 export default Slider;
