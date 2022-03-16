@@ -5,6 +5,7 @@ import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Products from '../../components/layout/Products/Products';
+import ProductsBanner from '../../components/layout/Products/ProductsBanner';
 
 const Contenitrice = styled.div``;
 
@@ -282,51 +283,18 @@ const ProductList = () => {
   }, [getCategories]);
 
   return (
-    <Container>
-      <Contenitrice>
-        <Wrapper>
-          <br />
-          <br />
-
-          <p></p>
-          <Top>
-            {/*<TopButton>CONTINUE SHOPPING</TopButton>*/}
-            <TopTexts>{/*<TopText>No. Resultados</TopText>*/}</TopTexts>
-            <FilterContainerResponsive>
-              <Select1 value={cat} name='categoría' onChange={handleFilters}>
-                {' '}
-                {categories.map((category) => (
-                  <Option value={category.codCatUno} key={category.codCatUno}>
-                    {category.descripcion}
-                  </Option>
-                ))}
-              </Select1>
-              {/*<Select name='size' onChange={handleFilters}>
-                <Option disabled>Size</Option>
-                <Option>XS</Option>
-                <Option>S</Option>
-                <Option>M</Option>
-                <Option>L</Option>
-                <Option>XL</Option>
-                </Select>*/}
-            </FilterContainerResponsive>
-            <Sortby>
-              <Select2 onChange={(e) => setSort(e.target.value)}>
-                <Option value='newest'>Ordenar / Newest</Option>
-                <Option Option value='desc'>
-                  Precio más alto / Desc
-                </Option>
-                <Option value='asc'>Precio más bajo / asc</Option>
-              </Select2>
-            </Sortby>
-          </Top>
-          <Bottom>
-            <Summary>
-              <br />
-              <h4>Filtrar por:</h4>
-              <br />
-              {/*<Button>Reiniciar</Button>*/}
-              <FilterContainer>
+    <>
+      <ProductsBanner />
+      <Container>
+        <Contenitrice>
+          <Wrapper>
+            <br />
+            <br />
+            <p></p>
+            <Top>
+              {/*<TopButton>CONTINUE SHOPPING</TopButton>*/}
+              <TopTexts>{/*<TopText>No. Resultados</TopText>*/}</TopTexts>
+              <FilterContainerResponsive>
                 <Select1 value={cat} name='categoría' onChange={handleFilters}>
                   {' '}
                   {categories.map((category) => (
@@ -343,15 +311,57 @@ const ProductList = () => {
                 <Option>L</Option>
                 <Option>XL</Option>
                 </Select>*/}
-              </FilterContainer>
-            </Summary>
-            <Info>
-              <Products cat={cat} filters={filters} sort={sort} />
-            </Info>
-          </Bottom>
-        </Wrapper>
-      </Contenitrice>
-    </Container>
+              </FilterContainerResponsive>
+              <Sortby>
+                <Select2 onChange={(e) => setSort(e.target.value)}>
+                  <Option value='newest'>Ordenar / Newest</Option>
+                  <Option Option value='desc'>
+                    Precio más alto / Desc
+                  </Option>
+                  <Option value='asc'>Precio más bajo / asc</Option>
+                </Select2>
+              </Sortby>
+            </Top>
+            <Bottom>
+              <Summary>
+                <br />
+                <h4>Filtrar por:</h4>
+                <br />
+                {/*<Button>Reiniciar</Button>*/}
+                <FilterContainer>
+                  <Select1
+                    value={cat}
+                    name='categoría'
+                    onChange={handleFilters}
+                  >
+                    {' '}
+                    {categories.map((category) => (
+                      <Option
+                        value={category.codCatUno}
+                        key={category.codCatUno}
+                      >
+                        {category.descripcion}
+                      </Option>
+                    ))}
+                  </Select1>
+                  {/*<Select name='size' onChange={handleFilters}>
+                <Option disabled>Size</Option>
+                <Option>XS</Option>
+                <Option>S</Option>
+                <Option>M</Option>
+                <Option>L</Option>
+                <Option>XL</Option>
+                </Select>*/}
+                </FilterContainer>
+              </Summary>
+              <Info>
+                <Products cat={cat} filters={filters} sort={sort} />
+              </Info>
+            </Bottom>
+          </Wrapper>
+        </Contenitrice>
+      </Container>
+    </>
   );
 };
 
