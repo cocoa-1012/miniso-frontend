@@ -1,16 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-//import { Add, Remove } from "@mui/icons-material";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import classes from "./Cart.module.css";
-import "./Cart.css";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { removeProduct } from "../../redux/cartRedux";
-import { updateCart } from "../../redux/cartRedux";
-import { Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Container } from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { removeProduct, updateCart } from '../../redux/cartRedux';
+import './Cart.css';
+import classes from './Cart.module.css';
 
 const Contenitrice = styled.div``;
 const Wrapper = styled.div`
@@ -147,8 +143,8 @@ const SummaryItem = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
-  font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
+  font-weight: ${(props) => props.type === 'total' && '500'};
+  font-size: ${(props) => props.type === 'total' && '24px'};
 `;
 
 const SummaryItemText = styled.span``;
@@ -183,13 +179,13 @@ const Cart = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
-  let username = localStorage.getItem("username");
+  let username = localStorage.getItem('username');
   if (!username) {
   }
-  let token = JSON.parse(localStorage.getItem("user")).access_token;
+  let token = JSON.parse(localStorage.getItem('user'))?.access_token;
   let api = `http://3.16.73.177:9080/private/cart/find?userName=${username}`;
 
-  var res = "";
+  var res = '';
   const [fetchedData, setFetchedData] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [productList, setProductList] = useState([]);
@@ -265,7 +261,7 @@ const Cart = () => {
                   ? productList.map((product) => (
                       <Product id={product.id}>
                         <ProductDetail>
-                          <Image src={product.url + "-1.jpg"} />
+                          <Image src={product.url + '-1.jpg'} />
                           <Details>
                             <ProductName>
                               <b>Producto:</b>
@@ -307,7 +303,7 @@ const Cart = () => {
                         </PriceDetail>
                       </Product>
                     ))
-                  : ""}
+                  : ''}
                 <Hr />
               </Info>
               <Summary>
@@ -315,7 +311,7 @@ const Cart = () => {
                 <SummaryItem>
                   <SummaryItemText>Subtotal</SummaryItemText>
                   <SummaryItemPrice>
-                    Q. {cartData ? cartData.granTotal : "0.00"}
+                    Q. {cartData ? cartData.granTotal : '0.00'}
                   </SummaryItemPrice>
                 </SummaryItem>
                 <SummaryItem>
@@ -329,7 +325,7 @@ const Cart = () => {
                 <SummaryItem type='total'>
                   <SummaryItemText>Total</SummaryItemText>
                   <SummaryItemPrice>
-                    Q. {cartData ? cartData.granTotalDiscount : "0.00"}
+                    Q. {cartData ? cartData.granTotalDiscount : '0.00'}
                   </SummaryItemPrice>
                 </SummaryItem>
                 <Link to='/payment' className={classes.link2}>
@@ -345,7 +341,7 @@ const Cart = () => {
       </Container>
     );
   } else {
-    return "";
+    return '';
   }
 };
 export default Cart;

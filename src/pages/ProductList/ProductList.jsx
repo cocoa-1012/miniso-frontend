@@ -1,8 +1,7 @@
 import { Container } from '@mui/material';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Products from '../../components/layout/Products/Products';
 import ProductsBanner from '../../components/layout/Products/ProductsBanner';
 import {
@@ -22,15 +21,18 @@ import {
 } from './ProductList.styled';
 
 const ProductList = () => {
+  const { category: cat } = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [cat]);
 
-  const location = useLocation();
-  const cat = location.pathname.split('/')[2];
+  // eslint-disable-next-line no-unused-vars
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState('newest');
   let history = useHistory();
+  useEffect(() => {
+    console.log({ cat });
+  }, [cat]);
 
   const handleFilters = async (event) => {
     const value = event.target.value;
