@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import "./Form.css";
-import "./Confirm.css";
-import axios from "axios";
+import axios from 'axios';
+import React, { Component } from 'react';
+import { toast } from 'react-toastify';
+import './Confirm.css';
+import './Form.css';
 
 export class Confirm extends Component {
   constructor(props) {
@@ -35,11 +36,11 @@ export class Confirm extends Component {
       values: { cardname, cardnumber, codigo, date },
     } = this.props;
 
-    let username = localStorage.getItem("username");
-    let token = JSON.parse(localStorage.getItem("user")).access_token;
+    let username = localStorage.getItem('username');
+    let token = JSON.parse(localStorage.getItem('user')).access_token;
 
     var config = {
-      method: "post",
+      method: 'post',
       url: `http://3.16.73.177:9080/private/cart/end?userName=${username}`,
       headers: { Authorization: `Bearer ${token}`, crossDomain: true },
       data: {
@@ -47,7 +48,7 @@ export class Confirm extends Component {
         numCart: cardnumber,
         cvv: codigo,
         fechaExpira: date,
-        ip: "192.168.211.88",
+        ip: '192.168.211.88',
       },
     };
 
@@ -57,7 +58,9 @@ export class Confirm extends Component {
         return response.data;
       })
       .catch(function (error) {
-        alert("Error al realizar el pago");
+        // alert('Error al realizar el pago');
+        toast.error('dlfkjasikdfl');
+
         console.log(error);
       });
 

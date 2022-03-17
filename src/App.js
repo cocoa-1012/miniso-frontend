@@ -12,6 +12,9 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+// toast
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 //import AuthVerify from "./common/AuthVerify";
 import EventBus from './common/EventBus';
@@ -84,6 +87,17 @@ const App = () => {
 
   return (
     <Router>
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
       {/*<Announcement />*/}
       {/*<FirstNavigation />*/}
       <header className={classes.header}>
