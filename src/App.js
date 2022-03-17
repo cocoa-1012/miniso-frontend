@@ -1,60 +1,58 @@
-import React, { useState, useEffect } from "react";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Container } from '@mui/material';
+//MATERIAL-UI FIRSTNAVIGATIONBAR
+import Badge from '@mui/material/Badge';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   //Routes,
   Link,
-  //Redirect,
-} from "react-router-dom";
-import classes from "./FirstNavigation.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-//MATERIAL-UI FIRSTNAVIGATIONBAR
-import Badge from "@mui/material/Badge";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-
-// AUTHENTICATION
-import AuthService from "./services/auth.service";
-import Profile from "./components/layout/Profile/Profile";
-
+  Route,
+  Switch,
+} from 'react-router-dom';
+// toast
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+//import AuthVerify from "./common/AuthVerify";
+import EventBus from './common/EventBus';
+//import FirstNavigation from "./components/layout/Header/FirstNavigation";
+import Footer from './components/layout/Footer/Footer';
+import MainNavigation from './components/layout/Header/MainNavigation';
+import Profile from './components/layout/Profile/Profile';
+import classes from './FirstNavigation.module.css';
+import Cart from './pages/Cart/Cart';
+import AccesoriosMaquillaje from './pages/Categories/AccesoriosMaquillaje';
+import AlimentosyBebidas from './pages/Categories/AlimentosyBebidas';
+import BolsasyAccesorios from './pages/Categories/BolsasyAccesorios';
+import Cosmeticos from './pages/Categories/Cosmeticos';
+import CuidadoPersonal from './pages/Categories/CuidadoPersonal';
+import Electronicos from './pages/Categories/Electronicos';
+import EstilodeVida from './pages/Categories/EstilodeVida';
+import Juguetes from './pages/Categories/Juguetes';
+import LibreriayPapeleria from './pages/Categories/LibreriayPapeleria';
+import PerfumesyAromatizantes from './pages/Categories/PerfumesyAromatizantes';
+import RegalosGratis from './pages/Categories/RegalosGratis';
+import Textil from './pages/Categories/Textil';
+import Collections from './pages/Collections';
+import ContactUs from './pages/ContactUs';
 //import BoardModerator from "./components/board-moderator.component";
 //import BoardAdmin from "./components/board-admin.component";
-
-import HomePage from "./pages/HomePage";
-import TheNew from "./pages/TheNew";
-import Collections from "./pages/Collections";
-import MainNavigation from "./components/layout/Header/MainNavigation";
-import Announcement from "./components/layout/Header/Announcement";
-//import FirstNavigation from "./components/layout/Header/FirstNavigation";
-import Footer from "./components/layout/Footer/Footer";
-import Sale from "./pages/Sale";
-import AccesoriosMaquillaje from "./pages/Categories/AccesoriosMaquillaje";
-import AlimentosyBebidas from "./pages/Categories/AlimentosyBebidas";
-import BolsasyAccesorios from "./pages/Categories/BolsasyAccesorios";
-import Cosmeticos from "./pages/Categories/Cosmeticos";
-import CuidadoPersonal from "./pages/Categories/CuidadoPersonal";
-import Electronicos from "./pages/Categories/Electronicos";
-import EstilodeVida from "./pages/Categories/EstilodeVida";
-import Juguetes from "./pages/Categories/Juguetes";
-import LibreriayPapeleria from "./pages/Categories/LibreriayPapeleria";
-import PerfumesyAromatizantes from "./pages/Categories/PerfumesyAromatizantes";
-import RegalosGratis from "./pages/Categories/RegalosGratis";
-import Textil from "./pages/Categories/Textil";
-import Stores from "./pages/Stores";
-import ContactUs from "./pages/ContactUs";
-import ShopNow from "./pages/ShopNow";
-import Product from "./pages/Product/Product";
-import ProductList from "./pages/ProductList/ProductList";
-import Cart from "./pages/Cart/Cart";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import HomePage from './pages/HomePage';
+import Login from './pages/Login/Login';
 //import { render } from "@testing-library/react";
-import Payment from "./pages/Payment/Payment";
-import { useSelector } from "react-redux";
-//import AuthVerify from "./common/AuthVerify";
-import EventBus from "./common/EventBus";
-import { Container } from "@mui/material";
+import Payment from './pages/Payment/Payment';
+import Product from './pages/Product/Product';
+import ProductList from './pages/ProductList/ProductList';
+import Register from './pages/Register/Register';
+import Sale from './pages/Sale';
+import ShopNow from './pages/ShopNow';
+import Stores from './pages/Stores';
+import TheNew from './pages/TheNew';
+// AUTHENTICATION
+import AuthService from './services/auth.service';
 
 const App = () => {
   // const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -71,12 +69,12 @@ const App = () => {
       //  setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
 
-    EventBus.on("logout", () => {
+    EventBus.on('logout', () => {
       logOut();
     });
 
     return () => {
-      EventBus.remove("logout");
+      EventBus.remove('logout');
     };
   }, []);
 
@@ -89,6 +87,17 @@ const App = () => {
 
   return (
     <Router>
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
       {/*<Announcement />*/}
       {/*<FirstNavigation />*/}
       <header className={classes.header}>
@@ -116,18 +125,18 @@ const App = () => {
               <div className={classes.right}>
                 {currentUsername ? (
                   <div className={classes.specialLinks}>
-                    <Link to={"/profile"} className={classes.link}>
+                    <Link to={'/profile'} className={classes.link}>
                       <div className={classes.MenuItem}>{currentUsername}</div>
                     </Link>
-                    <li className='nav-item'>
-                      <a
-                        href='/login'
+                    <div className={`nav-item ${classes.logoutButton}`}>
+                      <Link
+                        to='/login'
                         className={classes.MenuItem}
                         onClick={logOut}
                       >
                         CERRAR SESION
-                      </a>
-                    </li>
+                      </Link>
+                    </div>
                   </div>
                 ) : (
                   <div className={classes.specialLinks}>

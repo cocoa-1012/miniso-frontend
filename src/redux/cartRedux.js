@@ -1,12 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import authService from "../services/auth.service";
-import { useState } from "react";
+import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const cartQty = localStorage.getItem("cartQty");
+const cartQty = localStorage.getItem('cartQty');
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: {
     products: [],
     quantity: cartQty ? cartQty : 0,
@@ -47,8 +45,8 @@ const cartSlice = createSlice({
 
 const PostAddProduct = async (producto, barra, cantidad) => {
   let itWasAdded = false;
-  let username = localStorage.getItem("username");
-  let token = JSON.parse(localStorage.getItem("user")).access_token;
+  let username = localStorage.getItem('username');
+  let token = JSON.parse(localStorage.getItem('user')).access_token;
   let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
   let reqData = {
     codInt: producto,
@@ -58,7 +56,7 @@ const PostAddProduct = async (producto, barra, cantidad) => {
 
   try {
     const response = axios({
-      method: "post",
+      method: 'post',
       url: api,
       widthCredentials: true,
       crossdomain: true,
@@ -71,7 +69,7 @@ const PostAddProduct = async (producto, barra, cantidad) => {
       itWasAdded = true;
     }
   } catch (error) {
-    console.log("...." + error.message);
+    console.log('....' + error.message);
   }
 
   return itWasAdded;

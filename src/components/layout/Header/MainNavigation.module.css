@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  height: 3rem;
+  /* height: 3rem; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,15 +13,15 @@
 
 .header ul {
   list-style: none;
-  margin-left: -110px;
   padding: 0;
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
 }
 
 .header li {
-  padding-left: 125.6px;
-  padding-top: 15px;
+  /* padding-top: 15px; */
 }
 
 .header a {

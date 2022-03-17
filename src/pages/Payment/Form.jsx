@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import AccountSetup from "./AccountSetup";
+import React, { Component } from 'react';
+import AccountSetup from './AccountSetup';
 //import SocialProfiles from "./SocialProfiles";
-import Confirm from "./Confirm";
-import Success from "./Success";
+import Confirm from './Confirm';
+import Success from './Success';
 
 export class Form extends Component {
   state = {
     step: 1,
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    facebook: "",
-    twitter: "",
-    github: "",
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+    facebook: '',
+    twitter: '',
+    github: '',
   };
 
   nextStep = () => {
@@ -71,6 +71,8 @@ export class Form extends Component {
         );
       case 3:
         return <Success />;
+      default:
+        return null;
     }
   }
 }
