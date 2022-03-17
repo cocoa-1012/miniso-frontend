@@ -58,10 +58,7 @@ export class Confirm extends Component {
         return response.data;
       })
       .catch(function (error) {
-        // alert('Error al realizar el pago');
-        toast.error('dlfkjasikdfl');
-
-        console.log(error);
+        toast.error('Error al realizar el pago');
       });
 
     console.log(respuesta);

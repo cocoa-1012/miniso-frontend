@@ -204,3 +204,8 @@ const Cart = () => {
   return null;
 };
 export default Cart;
+
+/*
+3,4,8 9.5 ,13,14
+
+*/
