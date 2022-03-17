@@ -54,7 +54,7 @@ const Footer = () => {
               </div> */}
               {/*END GRID COLUMN*/}
               <hr className='clearfix w-100 d-md-none' />
-              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto'>
+              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto '>
                 <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                   Categorías
                 </h5>
@@ -66,44 +66,22 @@ const Footer = () => {
                       </Link>
                     </li>
                   ))}
-                  {/* <li>
-                    <a href='http://localhost:3000/'>Busqueda de dominios</a>
-                  </li>
-                  <li>
-                    <a href='http://localhost:3000/'>Sitios web</a>
-                  </li>
-                  <li>
-                    <a href='http://localhost:3000/'>WordPress</a>
-                  </li>
-                  <li>
-                    <a href='http://localhost:3000/'>
-                      Seguridad de paginas web
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http://localhost:3000/'>
-                      Correo electronico y Office
-                    </a>
-                  </li>
-                  <li>
-                    <a href='http://localhost:3000/'>Promociones</a>
-                  </li> */}
                 </ul>
               </div>
-              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto'>
+              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto contactDiv'>
                 <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                   Contacto
                 </h5>
-                <p>
-                  <i className='fas fa-map-marker-alt me-3'></i>16 calle 6-72
+                <p className='hover-red'>
+                  <i className='fas fa-map-marker-alt me-3  '></i>16 calle 6-72
                   zona 10 Centro Comercial La Estación Local N-L22 Primer Nivel.
                 </p>
-                <p>
+                <p className=' hover-red'>
                   <i className='fas fa-envelope me-3'></i>
                   hola@miniso.com.gt
                 </p>
-                <p>
-                  <i className='fas fa-phone me-3'></i> 2445-5689
+                <p className='hover-red'>
+                  <i className='fas fa-phone me-3 hover-red'></i> 2445-5689
                 </p>
               </div>
               {/*END GRID COLUMN*/}

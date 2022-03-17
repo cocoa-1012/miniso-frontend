@@ -17,13 +17,30 @@
   font-size: 13.5px;
 }
 
-.category_list li{
+.category_list li {
   margin-top: 8x;
 }
+.category_list li {
+  font-size: 16px;
+}
+.category_list li a {
+  transition: all 0.4s;
+}
+.category_list li a:hover {
+  color: #e71425;
+}
 
-.category_list a{
+.category_list a {
   color: white;
   text-decoration: none;
+}
+
+.hover-red:hover {
+  color: #e71425;
+}
+.contactDiv p {
+  font-size: 16px;
+  transition: all 0.4s;
 }
 
 /*MEDIAQUERIES*/
