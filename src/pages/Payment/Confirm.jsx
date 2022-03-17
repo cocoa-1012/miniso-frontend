@@ -41,7 +41,8 @@ export class Confirm extends Component {
 
     var config = {
       method: 'post',
-      url: `http://3.16.73.177:9080/private/cart/end?userName=${username}`,
+      // url: `http://3.16.73.177:9080/private/cart/end?userName=${username}`,
+      url: `/api/private/cart/end?userName=${username}`,
       headers: { Authorization: `Bearer ${token}`, crossDomain: true },
       data: {
         nombre: cardname,

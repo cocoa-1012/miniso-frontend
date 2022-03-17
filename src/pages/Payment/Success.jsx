@@ -19,7 +19,8 @@ export class Success extends Component {
       ("0" + d.getMinutes()).slice(-2);
 
     axios({
-      url: `http://3.16.73.177:9080/public/voucher/user?userName=${username}`,
+      // url: `http://3.16.73.177:9080/public/voucher/user?userName=${username}`,
+      url: `/api/public/voucher/user?userName=${username}`,
       method: "GET",
       responseType: "blob", // important
     }).then((response) => {

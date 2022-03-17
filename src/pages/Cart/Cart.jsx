@@ -42,7 +42,8 @@ const Cart = () => {
   if (!username) {
   }
   let token = JSON.parse(localStorage.getItem('user'))?.access_token;
-  let api = `http://3.16.73.177:9080/private/cart/find?userName=${username}`;
+  // let api = `http://3.16.73.177:9080/private/cart/find?userName=${username}`;
+  let api = `/api/private/cart/find?userName=${username}`;
 
   var res = '';
   const [fetchedData, setFetchedData] = useState([]);

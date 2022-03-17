@@ -14,7 +14,8 @@ const register = (
   phone,
   address
 ) => {
-  return axios.post(API_URL + "/public/users/register", {
+  // return axios.post(API_URL + "/public/users/register", {
+    return axios.post("/api/public/users/register", {
     // username,
     // email,|
     // password,
@@ -48,7 +49,8 @@ const login = (username, password) => {
 
   return axios
     .post(
-      API_URL + "/oauth/token",
+      // API_URL + "/oauth/token",
+      "/api/oauth/token",
       $.param({
         username,
         password,

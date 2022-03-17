@@ -1,11 +1,11 @@
+import Container from "@mui/material/Container";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import styled from "styled-components";
-import classes from "./ShopNow.module.css";
-import axios from "axios";
-import Products from "../components/layout/Products/Products";
-import Container from "@mui/material/Container";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import Products from "../components/layout/Products/Products";
+import classes from "./ShopNow.module.css";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -97,7 +97,8 @@ const ShopNow = () => {
   };
 
   const [categories, setCategories] = useState([]);
-  let catUrl = "http://3.16.73.177:9080/public/categories/first";
+  // let catUrl = "http://3.16.73.177:9080/public/categories/first";
+  let catUrl = "/api/public/categories/first";
 
   useEffect(() => {
     getCategories();

@@ -19,7 +19,8 @@ const Drawer = () => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = useCallback(async () => {
-    let url = 'http://3.16.73.177:9080/public/categories/first';
+    // let url = 'http://3.16.73.177:9080/public/categories/first';
+    let url = '/api/public/categories/first';
     const res = await axios.get(url, {
       crossDomain: true,
     });

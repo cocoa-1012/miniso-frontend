@@ -45,7 +45,8 @@ const Product = () => {
         try {
           const res = await axios.get(
             pk && barra
-              ? `http://3.16.73.177:9080/public/products/pk?codeInt=${pk}&barra=${barra}`
+              // ? `http://3.16.73.177:9080/public/products/pk?codeInt=${pk}&barra=${barra}`
+              ? `/api/public/products/pk?codeInt=${pk}&barra=${barra}`
               : ''
           );
 

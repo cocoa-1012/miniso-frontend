@@ -47,7 +47,8 @@ const PostAddProduct = async (producto, barra, cantidad) => {
   let itWasAdded = false;
   let username = localStorage.getItem('username');
   let token = JSON.parse(localStorage.getItem('user')).access_token;
-  let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
+  // let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
+  let api = `/api/private/cart/add?userName=${username}`;
   let reqData = {
     codInt: producto,
     barra: barra,
