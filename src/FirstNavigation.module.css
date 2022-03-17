@@ -59,11 +59,16 @@
   border: none;
   width: 100%;
 }
+.logoutButton {
+  width: max-content;
+}
 
 .MenuItem {
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  text-decoration: none;
+  color: #000000;
 }
 
 .link {
