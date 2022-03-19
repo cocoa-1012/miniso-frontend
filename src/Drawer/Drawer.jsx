@@ -1,3 +1,4 @@
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -8,9 +9,18 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 //import MenuIcon from "@mui/icons-material/Menu";
 import classes from './Drawer.module.css';
 
+const CategoryItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.5s;
+  &:hover {
+    color: blue;
+  }
+`;
 const Drawer = () => {
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open) => (event) => {
@@ -19,8 +29,8 @@ const Drawer = () => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = useCallback(async () => {
-    // let url = 'http://3.16.73.177:9080/public/categories/first';
-    let url = '/api/public/categories/first';
+    let url = 'http://3.16.73.177:9080/public/categories/first';
+    // let url = '/api/public/categories/first';
     const res = await axios.get(url, {
       crossDomain: true,
     });
@@ -68,7 +78,12 @@ const Drawer = () => {
                     to={`/productoslista/${cat.codCatUno}`}
                     className={classes.link}
                   >
-                    <div>{cat.descripcion}</div>
+                    <CategoryItem>
+                      <span>{cat.descripcion}</span>
+                      <span className='arrow'>
+                        <ArrowRightAltIcon />
+                      </span>
+                    </CategoryItem>
                   </Link>
                 ))}
               </ListItemText>
