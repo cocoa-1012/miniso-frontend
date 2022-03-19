@@ -17,8 +17,13 @@
   font-size: 13.5px;
 }
 
+.category_list {
+  list-style: none;
+  padding: 0;
+}
 .category_list li {
   margin-top: 8x;
+  margin-bottom: 5px;
 }
 .category_list li {
   font-size: 16px;

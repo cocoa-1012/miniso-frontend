@@ -10,8 +10,8 @@ const Footer = () => {
 
   const fetchCategories = useCallback(() => {
     axios
-      // .get('http://3.16.73.177:9080/public/categories/first')
-      .get('/api/public/categories/first')
+      .get('http://3.16.73.177:9080/public/categories/first')
+      //   .get('/api/public/categories/first')
       .then((res) => {
         setCategories(res.data.body);
       })
