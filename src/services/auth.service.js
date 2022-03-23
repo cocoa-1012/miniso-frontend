@@ -1,5 +1,5 @@
-import axios from "axios";
-import $ from "jquery";
+import axios from 'axios';
+import $ from 'jquery';
 
 const API_URL = `http://3.16.73.177:9080`;
 
@@ -15,7 +15,7 @@ const register = (
   address
 ) => {
   // return axios.post(API_URL + "/public/users/register", {
-    return axios.post("/api/public/users/register", {
+  return axios.post('/api/public/users/register', {
     // username,
     // email,|
     // password,
@@ -32,16 +32,16 @@ const register = (
 };
 
 const login = (username, password) => {
-  const grant_type = "password";
-  localStorage.setItem("username", username);
+  const grant_type = 'password';
+  localStorage.setItem('username', username);
 
   const config = {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     },
     auth: {
-      username: "ReactMinisoApp",
-      password: "R3@l1z3m1n1z0",
+      username: 'ReactMinisoApp',
+      password: 'R3@l1z3m1n1z0',
     },
     withCredentials: true,
     crossDomain: true,
@@ -49,8 +49,8 @@ const login = (username, password) => {
 
   return axios
     .post(
-      // API_URL + "/oauth/token",
-      "/api/oauth/token",
+      API_URL + '/oauth/token',
+      //   "/api/oauth/token",
       $.param({
         username,
         password,
@@ -60,7 +60,7 @@ const login = (username, password) => {
     )
     .then((response) => {
       if (response.data.access_token) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem('user', JSON.stringify(response.data));
       }
 
       return response.data;
@@ -68,21 +68,15 @@ const login = (username, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("username");
+  localStorage.removeItem('username');
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  return JSON.parse(localStorage.getItem('user'));
 };
 
 const getCurrentUsername = () => {
-  return localStorage.getItem("username");
+  return localStorage.getItem('username');
 };
-
-export default {
-  register,
-  login,
-  logout,
-  getCurrentUser,
-  getCurrentUsername,
-};
+const data = { register, login, logout, getCurrentUser, getCurrentUsername };
+export default data;

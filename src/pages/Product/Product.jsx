@@ -6,8 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-//import { publicRequest } from "../../requestMethods";
-import { addProduct } from '../../redux/cartRedux';
+import { addProductToCart } from '../../redux/cartAction';
 import classes from './Product.module.css';
 //import sushi2 from "../../assets/card/sushi2.jpeg";
 //import sushi3 from "../../assets/card/sushi3.jpeg";
@@ -26,7 +25,6 @@ const Product = () => {
 
   const photos = [
     `${product.url}-1.jpg`,
-
     `${product.url}-2.jpg`,
     `${product.url}-3.jpg`,
 
@@ -34,20 +32,15 @@ const Product = () => {
     sushi3,*/
   ];
 
-  const createRef = () => {
-    photos.push(React.createRef);
-    setThumbsRefList(photos);
-  };
-
   useEffect(
     () => {
       const getProduct = async () => {
         try {
           const res = await axios.get(
             pk && barra
-              // ? `http://3.16.73.177:9080/public/products/pk?codeInt=${pk}&barra=${barra}`
-              ? `/api/public/products/pk?codeInt=${pk}&barra=${barra}`
-              : ''
+              ? `http://3.16.73.177:9080/public/products/pk?codeInt=${pk}&barra=${barra}`
+              : // `/api/public/products/pk?codeInt=${pk}&barra=${barra}`
+                ''
           );
 
           setProduct(res.data.body);
@@ -76,12 +69,7 @@ const Product = () => {
 */
   const handleQuantity = (type) => {
     let qty = parseInt(quantity);
-    if (type === 'dec') {
-      setQuantity(qty - 1);
-    } else {
-      setQuantity(qty + 1);
-    }
-    localStorage.setItem('cartQty', qty);
+    setQuantity(type === 'dec' ? qty - 1 : qty + 1);
   };
 
   const handleTab = (index) => {
@@ -94,8 +82,8 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    toast('Product added to cart');
-    dispatch(addProduct({ ...product, quantity }));
+    toast.success('Product added to cart');
+    dispatch(addProductToCart(product, quantity));
   };
 
   const componentDidMount = () => {

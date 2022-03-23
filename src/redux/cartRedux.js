@@ -1,27 +1,38 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const cartQty = localStorage.getItem('cartQty');
-
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     products: [],
-    quantity: cartQty ? cartQty : 0,
+    quantity: 0,
     total: 0,
   },
   reducers: {
     addProduct: (state, action) => {
-      let producto = action.payload.productosPkDto.codInt;
-      let barra = action.payload.productosPkDto.barra;
-      let cantidad = parseInt(action.payload.quantity);
-
-      const addIt = PostAddProduct(producto, barra, cantidad);
-      if (addIt) {
-        state.quantity = parseInt(state.quantity) + cantidad;
-        state.products.push(cantidad);
-        state.total += action.payload.precio * cantidad;
+      const find = state.products.find(
+        (pr) =>
+          pr.productosPkDto.codInt === action.payload.productosPkDto.codInt
+      );
+      if (find && Object.keys(find).length !== 0) {
+        find.amount += action.payload.amount;
+      } else {
+        state.products.push(action.payload);
       }
+
+      const quantity = state.products
+        .map((item) => {
+          return item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+      const total = state.products
+        .map((item) => {
+          return item.precio * item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+
+      state.quantity = quantity;
+      state.total = total;
     },
 
     removeProduct: (state, action) => {
@@ -43,16 +54,16 @@ const cartSlice = createSlice({
   },
 });
 
-const PostAddProduct = async (producto, barra, cantidad) => {
+const PostAddProduct = async (codInt, barra, quantity) => {
   let itWasAdded = false;
   let username = localStorage.getItem('username');
   let token = JSON.parse(localStorage.getItem('user')).access_token;
   // let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
   let api = `/api/private/cart/add?userName=${username}`;
   let reqData = {
-    codInt: producto,
-    barra: barra,
-    cantidad: cantidad,
+    codInt,
+    barra,
+    cantidad: quantity,
   };
 
   try {
@@ -66,6 +77,7 @@ const PostAddProduct = async (producto, barra, cantidad) => {
       },
       data: reqData,
     });
+    console.log(response);
     if (response) {
       itWasAdded = true;
     }
