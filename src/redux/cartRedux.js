@@ -36,16 +36,29 @@ const cartSlice = createSlice({
     },
 
     removeProduct: (state, action) => {
-      let producto = action.payload.codigo;
-      let barra = action.payload.barra;
+      const codInt = action.payload.codInt;
+      const barra = action.payload.barra;
 
-      const removeIt = PostAddProduct(producto, barra, 0);
+      const newProducts = state.products.filter((product) => {
+        const { productosPkDto } = product;
+        if (productosPkDto.codInt === codInt && productosPkDto.barra === barra)
+          return false;
+        return true;
+      });
+      state.products = newProducts;
+      const quantity = state.products
+        .map((item) => {
+          return item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+      const total = state.products
+        .map((item) => {
+          return item.precio * item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
 
-      if (removeIt) {
-        state.quantity = 0;
-        state.products.push(0);
-        state.total += 0;
-      }
+      state.quantity = quantity;
+      state.total = total;
     },
 
     updateCart: (state, action) => {

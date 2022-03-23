@@ -1,7 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
+const Product = ({ item }) => {
+  const imagen = item.url
+    ? item.url
+    : '../../img/products/4509757451814-2.jpeg';
+
+  return (
+    <Contenitrice>
+      <Link
+        to={`/product/${item.productosPkDto.codInt}/${item.productosPkDto.barra}`}
+      >
+        <Image src={imagen + '-1.jpg'} />
+      </Link>
+      <Title>{item.descripcion}</Title>
+      <Price>Q.{item.precio}</Price>
+      {/*<Button>Agregar a Carrito</Button>*/}
+    </Contenitrice>
+  );
+};
 const Contenitrice = styled.div`
   overflow: hidden;
   box-shadow: 0 2px 10px #dfdfdf;
@@ -118,24 +136,5 @@ const Price = styled.p`
     cursor: pointer;
   }
 `;*/
-
-const Product = ({ item }) => {
-  const imagen = item.url
-    ? item.url
-    : "../../img/products/4509757451814-2.jpeg";
-
-  return (
-    <Contenitrice>
-      <Link
-        to={`/product/${item.productosPkDto.codInt}/${item.productosPkDto.barra}`}
-      >
-        <Image src={imagen + "-1.jpg"} />
-      </Link>
-      <Title>{item.descripcion}</Title>
-      <Price>Q.{item.precio}</Price>
-      {/*<Button>Agregar a Carrito</Button>*/}
-    </Contenitrice>
-  );
-};
 
 export default Product;

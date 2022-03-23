@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addProduct } from './cartRedux';
+import { addProduct, removeProduct } from './cartRedux';
 export const addProductToCart = (product, quantity) => (dispatch) => {
   const { barra, codInt } = product.productosPkDto;
   let username = localStorage.getItem('username');
@@ -24,6 +24,35 @@ export const addProductToCart = (product, quantity) => (dispatch) => {
   })
     .then(() => {
       dispatch(addProduct({ ...product, amount: quantity }));
+    })
+    .catch((error) => {
+      console.log('....' + error.message);
+    });
+};
+
+export const removeProductFromCart = (codInt, barra) => (dispatch) => {
+  let username = localStorage.getItem('username');
+  let token = JSON.parse(localStorage.getItem('user')).access_token;
+  let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
+  //   let api = `/api/private/cart/add?userName=${username}`;
+  let reqData = {
+    codInt,
+    barra,
+    cantidad: 0,
+  };
+
+  axios({
+    method: 'post',
+    url: api,
+    widthCredentials: true,
+    crossdomain: true,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: reqData,
+  })
+    .then(() => {
+      dispatch(removeProduct(codInt, barra));
     })
     .catch((error) => {
       console.log('....' + error.message);
