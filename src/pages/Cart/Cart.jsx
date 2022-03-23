@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeProductFromCart } from '../../redux/cartAction';
@@ -34,7 +34,7 @@ import {
 } from './Cart.styled';
 
 const Cart = () => {
-  const { quantity, total } = useSelector((state) => state.cart);
+  const { total } = useSelector((state) => state.cart);
 
   const cartProductsList = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
@@ -42,8 +42,6 @@ const Cart = () => {
   if (!username) {
   }
   let token = JSON.parse(localStorage.getItem('user'))?.access_token;
-
-  const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
     const api = `http://3.16.73.177:9080/private/cart/find?userName=${username}`;
