@@ -1,9 +1,9 @@
 import { Container } from '@mui/material';
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { removeProductFromCart } from '../../redux/cartAction';
+import { updateCart } from '../../redux/cartRedux';
 import { categories } from './../../data';
 import './Cart.css';
 import classes from './Cart.module.css';
@@ -32,7 +32,6 @@ import {
   Top,
   Wrapper,
 } from './Cart.styled';
-
 const Cart = () => {
   const { total } = useSelector((state) => state.cart);
 
@@ -41,23 +40,10 @@ const Cart = () => {
   let username = localStorage.getItem('username');
   if (!username) {
   }
-  let token = JSON.parse(localStorage.getItem('user'))?.access_token;
 
   useEffect(() => {
-    const api = `http://3.16.73.177:9080/private/cart/find?userName=${username}`;
-    //   let api = `/api/private/cart/find?userName=${username}`;
-    const getData = async () => {
-      const data = await axios.get(api, {
-        widthCredentials: true,
-        crossdomain: true,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(data.data.body);
-    };
-    getData();
-  }, [token, username]);
+    updateCart();
+  }, []);
 
   const handleClick = (codInt, barra) => {
     dispatch(removeProductFromCart(codInt, barra));
@@ -121,7 +107,7 @@ const Cart = () => {
                             e.preventDefault();
                             handleClick(
                               product.productosPkDto.codInt,
-                              product.productosPkDto.barrra,
+                              product.productosPkDto.barra,
                               product.id
                             );
                           }}

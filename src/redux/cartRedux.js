@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -62,46 +61,14 @@ const cartSlice = createSlice({
     },
 
     updateCart: (state, action) => {
-      state.quantity = action.payload.quantity;
+      const { quantity, total, products } = action.payload;
+      state.quantity = quantity;
+      state.total = total;
+      state.products = products;
     },
   },
 });
 
-const PostAddProduct = async (codInt, barra, quantity) => {
-  let itWasAdded = false;
-  let username = localStorage.getItem('username');
-  let token = JSON.parse(localStorage.getItem('user')).access_token;
-  // let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
-  let api = `/api/private/cart/add?userName=${username}`;
-  let reqData = {
-    codInt,
-    barra,
-    cantidad: quantity,
-  };
+export const { addProduct, updateCart, removeProduct } = cartSlice.actions;
 
-  try {
-    const response = axios({
-      method: 'post',
-      url: api,
-      widthCredentials: true,
-      crossdomain: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: reqData,
-    });
-    console.log(response);
-    if (response) {
-      itWasAdded = true;
-    }
-  } catch (error) {
-    console.log('....' + error.message);
-  }
-
-  return itWasAdded;
-};
-
-export const { addProduct } = cartSlice.actions;
-export const { removeProduct } = cartSlice.actions;
-export const { updateCart } = cartSlice.actions;
 export default cartSlice.reducer;
