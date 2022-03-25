@@ -2,8 +2,10 @@ import { Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeProductFromCart } from '../../redux/cartAction';
-import { updateCart } from '../../redux/cartRedux';
+import {
+  removeProductFromCart,
+  updateCartFromServer,
+} from '../../redux/cartAction';
 import { categories } from './../../data';
 import './Cart.css';
 import classes from './Cart.module.css';
@@ -42,8 +44,8 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    updateCart();
-  }, []);
+    dispatch(updateCartFromServer());
+  }, [dispatch]);
 
   const handleClick = (codInt, barra) => {
     dispatch(removeProductFromCart(codInt, barra));
@@ -76,54 +78,56 @@ const Cart = () => {
           </Top>
           <Bottom>
             <Info>
-              {cartProductsList
-                ? cartProductsList.map((product) => (
-                    <Product id={product.id} key={Math.random()}>
-                      <ProductDetail>
-                        <Image src={product.url + '-1.jpg'} />
-                        <Details>
-                          <ProductName>
-                            <b>Producto:</b>
-                            {product.descripcion}
-                          </ProductName>
-                          <ProductId>
-                            <b>Código: </b>
-                            {product.productosPkDto.codInt}
-                          </ProductId>
-                          <BarraId>
-                            <b>Barra: </b>
-                            {product.productosPkDto.barra}
-                          </BarraId>
-                          {/*<ProductColor color='black' />
+              {cartProductsList.length > 0 ? (
+                cartProductsList.map((product) => (
+                  <Product id={product.id} key={Math.random()}>
+                    <ProductDetail>
+                      <Image src={product.url + '-1.jpg'} />
+                      <Details>
+                        <ProductName>
+                          <b>Producto:</b>
+                          {product.descripcion}
+                        </ProductName>
+                        <ProductId>
+                          <b>Código: </b>
+                          {product.productosPkDto.codInt}
+                        </ProductId>
+                        <BarraId>
+                          <b>Barra: </b>
+                          {product.productosPkDto.barra}
+                        </BarraId>
+                        {/*<ProductColor color='black' />
                       <ProductSize>
                         <b>Size:</b>37.5
               </ProductSize>*/}
-                        </Details>
-                      </ProductDetail>
-                      <PriceDetail>
-                        <p
-                          className='btn-floating btn-fb mx-1'
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleClick(
-                              product.productosPkDto.codInt,
-                              product.productosPkDto.barra,
-                              product.id
-                            );
-                          }}
-                        >
-                          <i className='fa-solid fa-trash TrashIcon'></i>
-                        </p>
-                        <ProductAmountContainer>
-                          {/*<Add />*/}
-                          <ProductAmount>{product.amount}</ProductAmount>
-                          {/*<Remove />*/}
-                        </ProductAmountContainer>
-                        <ProductPrice>Q. {product.precio}</ProductPrice>
-                      </PriceDetail>
-                    </Product>
-                  ))
-                : ''}
+                      </Details>
+                    </ProductDetail>
+                    <PriceDetail>
+                      <p
+                        className='btn-floating btn-fb mx-1'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleClick(
+                            product.productosPkDto.codInt,
+                            product.productosPkDto.barra,
+                            product.id
+                          );
+                        }}
+                      >
+                        <i className='fa-solid fa-trash TrashIcon'></i>
+                      </p>
+                      <ProductAmountContainer>
+                        {/*<Add />*/}
+                        <ProductAmount>{product.amount}</ProductAmount>
+                        {/*<Remove />*/}
+                      </ProductAmountContainer>
+                      <ProductPrice>Q. {product.precio}</ProductPrice>
+                    </PriceDetail>
+                  </Product>
+                ))
+              ) : (
+                <h2>Cart is empty</h2>
+              )}
               <Hr />
             </Info>
             <Summary>

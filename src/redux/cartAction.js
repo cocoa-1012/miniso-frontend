@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addProduct, removeProduct } from './cartRedux';
+import { addProduct, removeProduct, updateCart } from './cartRedux';
 export const addProductToCart = (product, quantity) => (dispatch) => {
   const { barra, codInt } = product.productosPkDto;
   let username = localStorage.getItem('username');
@@ -56,7 +56,7 @@ export const removeProductFromCart = (codInt, barra) => (dispatch) => {
       console.log(error.response);
     });
 };
-export const updateCartFromServer = (codInt, barra) => (dispatch) => {
+export const updateCartFromServer = (codInt, barra) => async (dispatch) => {
   let username = localStorage.getItem('username');
   let token = JSON.parse(localStorage.getItem('user'))?.access_token;
   const api = `http://3.16.73.177:9080/private/cart/find?userName=${username}`;
@@ -70,8 +70,24 @@ export const updateCartFromServer = (codInt, barra) => (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      const items = res.data;
+    .then(async (res) => {
+      const items = res.data.body.itemsDtos;
       console.log(items);
+      const dataListPromise = items.map(
+        async ({ codeInt, codeBarrra, amount }) => {
+          const resData = await axios.get(
+            `http://3.16.73.177:9080/public/products/pk?codeInt=${codeInt}&barra=${codeBarrra}`
+          );
+          resData.amount = amount;
+          return resData;
+        }
+      );
+      const dataWithResponse = await Promise.all(dataListPromise);
+      console.log(dataWithResponse);
+      const allProducts = dataWithResponse.map((item) => {
+        item.data.body.amount = item.amount;
+        return item.data.body;
+      });
+      dispatch(updateCart(allProducts));
     });
 };

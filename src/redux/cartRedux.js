@@ -61,10 +61,21 @@ const cartSlice = createSlice({
     },
 
     updateCart: (state, action) => {
-      const { quantity, total, products } = action.payload;
+      const products = action.payload;
+      state.products = products;
+      const quantity = state.products
+        .map((item) => {
+          return item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+      const total = state.products
+        .map((item) => {
+          return item.precio * item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+
       state.quantity = quantity;
       state.total = total;
-      state.products = products;
     },
   },
 });
