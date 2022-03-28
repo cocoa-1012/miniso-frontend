@@ -49,6 +49,7 @@ import ProductList from './pages/ProductList/ProductList';
 import Register from './pages/Register/Register';
 import Sale from './pages/Sale';
 import ShopNow from './pages/ShopNow';
+import StorePage from './pages/Store/StorePage';
 import Stores from './pages/Stores';
 import TheNew from './pages/TheNew';
 // AUTHENTICATION
@@ -244,6 +245,10 @@ const App = () => {
         </Route>
         <Route path='/register'>
           <Register />
+          {/*{user ? <Redirect to='/' /> : <Register />}*/}
+        </Route>
+        <Route path='/store'>
+          <StorePage />
           {/*{user ? <Redirect to='/' /> : <Register />}*/}
         </Route>
       </Switch>

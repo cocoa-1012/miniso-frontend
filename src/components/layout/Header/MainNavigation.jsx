@@ -1,11 +1,11 @@
-import { Container } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
-import Drawer from "../../../Drawer/Drawer";
-import classes from "./MainNavigation.module.css";
+import { Container } from '@mui/material';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Drawer from '../../../Drawer/Drawer';
+import classes from './MainNavigation.module.css';
 
 const MainNavigation = ({ item }) => {
-  const cat = "04";
+  const cat = '04';
 
   return (
     <div className={classes.header}>
@@ -31,14 +31,17 @@ const MainNavigation = ({ item }) => {
             <Link to='/tiendas'>Tiendas</Link>
           </li>*/}
             <li>
-              {" "}
+              {' '}
               <Link to={`/productoslista/${cat}`}>Comprar ahora</Link>
             </li>
             <li>
-              <Link to="/contactanos">Contáctanos</Link>
+              <Link to='/contactanos'>Contáctanos</Link>
             </li>
             <li>
-              <Link to="/viewstores">View Store (New)</Link>
+              <Link to='/viewstores'>View Store (New)</Link>
+            </li>
+            <li>
+              <Link to='/tiendas'>Tiendas</Link>
             </li>
           </ul>
         </nav>
