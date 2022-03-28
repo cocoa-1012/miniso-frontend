@@ -10,6 +10,23 @@ import { addProductToCart } from '../../redux/cartAction';
 import classes from './Product.module.css';
 //import sushi2 from "../../assets/card/sushi2.jpeg";
 //import sushi3 from "../../assets/card/sushi3.jpeg";
+// CHECK IF IMAGE EXISTS
+function checkIfImageExists(url, callback) {
+  const img = new Image();
+  img.src = url;
+
+  if (img.complete) {
+    callback(true);
+  } else {
+    img.onload = () => {
+      callback(true);
+    };
+
+    img.onerror = () => {
+      callback(false);
+    };
+  }
+}
 
 const Product = () => {
   const location = useLocation();
@@ -22,15 +39,35 @@ const Product = () => {
   const dispatch = useDispatch();
   const [thumbsRefList, setThumbsRefList] = React.useState([]);
   const [indexPhoto, setIndexPhoto] = useState(2);
+  const [photos, setPhotos] = useState([]);
 
-  const photos = [
-    `${product.url}-1.jpg`,
-    `${product.url}-2.jpg`,
-    `${product.url}-3.jpg`,
+  useEffect(() => {
+    const imageUrls = [
+      `${product.url}-1.jpg`,
+      `${product.url}-2.jpg`,
+      `${product.url}-3.jpg`,
+    ];
+    const filterImageList = imageUrls.filter((item, i) => {
+      try {
+        const img = new Image();
+        img.src = item;
+        if (img.complete) {
+          return true;
+        }
+        img.onload = () => {
+          return true;
+        };
 
-    /* sushi2,
-    sushi3,*/
-  ];
+        img.onerror = () => {
+          return false;
+        };
+      } catch (error) {
+        return false;
+      }
+      return false;
+    });
+    setPhotos(filterImageList);
+  }, [product.url]);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -75,6 +112,7 @@ const Product = () => {
       images[i].className = images[i].className.replace('active', '');
     }
     images[index].className = 'active';
+    // USAGE
   };
 
   const handleClick = () => {
@@ -92,7 +130,7 @@ const Product = () => {
       <div className={classes.Contenitrice}>
         <div className={classes.Wrapper}>
           <div className={classes.ImgContainer}>
-            <img className={classes.Image} src={photos[indexPhoto]} />
+            <img className={classes.Image} src={photos[indexPhoto]} alt='' />
           </div>
           <div className={classes.InfoContainer}>
             <div className={classes.Row}>
