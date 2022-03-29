@@ -65,10 +65,11 @@ const ProductList = () => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
-
+  const image =
+    'https://minisobbs.s3.us-east-2.amazonaws.com/Zoho-admin/Accesorios-de-belleza.png';
   return (
     <>
-      <ProductsBanner />
+      <ProductsBanner image={image} />
       <Container>
         <Contenitrice>
           <Wrapper>

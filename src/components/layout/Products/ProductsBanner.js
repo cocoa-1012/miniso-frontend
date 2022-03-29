@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 const images = [
@@ -24,10 +24,7 @@ const BannerWrapper = styled.div`
   background-position: center center;
 `;
 
-const ProductsBanner = () => {
-  const [image, setImage] = useState(
-    'https://minisobbs.s3.us-east-2.amazonaws.com/Zoho-admin/Accesorios-de-belleza.png'
-  );
+const ProductsBanner = ({ image }) => {
   const { category } = useParams();
   useEffect(() => {
     const no = Math.floor(Math.random() * images.length);
