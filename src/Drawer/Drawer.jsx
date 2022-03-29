@@ -55,7 +55,7 @@ const Drawer = () => {
         onClose={toggleDrawer(false)}
         onClick={toggleDrawer(false)}
         PaperProps={{
-          sx: { width: '200px' },
+          sx: { width: '300px' },
         }}
       >
         <div>
