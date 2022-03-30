@@ -6,11 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  BrowserRouter as Router,
-  //Routes,
-  Link,
-  Route,
-  Switch,
+    BrowserRouter as Router,
+    //Routes,
+    Link,
+    Route,
+    Switch
 } from 'react-router-dom';
 // toast
 import { ToastContainer } from 'react-toastify';
@@ -27,9 +27,9 @@ import Cart from './pages/Cart/Cart';
 import AccesoriosMaquillaje from './pages/Categories/AccesoriosMaquillaje';
 import AlimentosyBebidas from './pages/Categories/AlimentosyBebidas';
 import BolsasyAccesorios from './pages/Categories/BolsasyAccesorios';
-import Cosmeticos from './pages/Categories/Cosmeticos';
+import Cosmetics from './pages/Categories/Cosmeticos';
 import CuidadoPersonal from './pages/Categories/CuidadoPersonal';
-import Electronicos from './pages/Categories/Electronicos';
+import Electronics from './pages/Categories/Electronicos';
 import EstilodeVida from './pages/Categories/EstilodeVida';
 import Juguetes from './pages/Categories/Juguetes';
 import LibreriayPapeleria from './pages/Categories/LibreriayPapeleria';
@@ -201,13 +201,13 @@ const App = () => {
           <BolsasyAccesorios />
         </Route>
         <Route path='/cosmeticos'>
-          <Cosmeticos />
+          <Cosmetics />
         </Route>
         <Route path='/cuidado-personal'>
           <CuidadoPersonal />
         </Route>
         <Route path='/electronicos'>
-          <Electronicos />
+          <Electronics />
         </Route>
         <Route path='/estilo-de-vida'>
           <EstilodeVida />

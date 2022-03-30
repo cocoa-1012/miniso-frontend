@@ -1,11 +1,10 @@
-import React from "react";
-
-import AuthService from "../../../services/auth.service";
-import classes from "./Profile.module.css";
+import React from 'react';
+// import AuthService from "../../../services/auth.service";
+import classes from './Profile.module.css';
 
 const Profile = () => {
   // const currentUser = AuthService.getCurrentUser();
-  const currentUsername = AuthService.getCurrentUsername();
+  //   const currentUsername = AuthService.getCurrentUsername();
 
   return (
     <div className='container'>

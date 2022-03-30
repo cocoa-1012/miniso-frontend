@@ -1,81 +1,23 @@
-import React, { useState } from "react";
-//import { useLocation } from "react-router";
-import styled from "styled-components";
-import classes from "./AccesoriosMaquillaje.module.css";
-import Products from "../../components/layout/Products/Products";
-import Container from "@mui/material/Container";
-
-const Wrapper = styled.div`
-  padding: 20px;
-`;
-
-const Title = styled.h1`
-  font-weight: 300;
-  text-align: center;
-`;
-
-const Top = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-`;
-
-/*const TopText = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin: 0px 350px;
-`;*/
-
-const Sortby = styled.div`
-  width: 15%;
-`;
-
-const TopTexts = styled.div``;
-
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const Info = styled.div`
-  flex: 3;
-`;
-
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 55vh;
-`;
-
-/*const FilterContainer = styled.div`
-  justify-content: space-between;
-`;*/
-
-const Select = styled.select`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-`;
-
-const Option = styled.option``;
-
-/*const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: black;
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-`;*/
+import Container from '@mui/material/Container';
+import React, { useState } from 'react';
+import Products from '../../components/layout/Products/Products';
+import {
+  Bottom,
+  Info,
+  Option,
+  Select,
+  Sortby,
+  Summary,
+  Title,
+  Top,
+  TopTexts,
+  Wrapper,
+} from '../styled/AccesoriosMaquillaje.styled';
+import classes from './AccesoriosMaquillaje.module.css';
 
 const AccesoriosMaquillaje = () => {
-  // const location = useLocation();
-  // const cat = location.pathname.split("/")[2];
   const [filters /*setFilters*/] = useState({});
-  const [sort, setSort] = useState("newest");
+  const [sort, setSort] = useState('newest');
 
   /*  const handleFilters = (e) => {
     const value = e.target.value;
@@ -140,7 +82,7 @@ const AccesoriosMaquillaje = () => {
             </FilterContainer>*/}
           </Summary>
           <Info>
-            <Products cat={"04"} filters={filters} sort={sort} />
+            <Products cat={'04'} filters={filters} sort={sort} />
           </Info>
         </Bottom>
       </Wrapper>

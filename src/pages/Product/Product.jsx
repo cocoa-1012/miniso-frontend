@@ -47,13 +47,11 @@ const Product = () => {
       `${product.url}-2.jpg`,
       `${product.url}-3.jpg`,
     ];
-    const filterImageList = imageUrls.filter((item, i) => {
+    const filterImageList = imageUrls.filter((item) => {
       try {
         const img = new Image();
         img.src = item;
-        if (img.complete) {
-          return true;
-        }
+        if (img.complete) return true;
         img.onload = () => {
           return true;
         };
