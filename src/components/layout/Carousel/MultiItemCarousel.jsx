@@ -36,7 +36,8 @@ const MultiItemCarousel = () => {
 
   const getSlides = useCallback(async () => {
     let url =
-      'http://3.16.73.177:9080/public/products/carrusel?carrusel=CARRUSEL1';
+      // 'http://3.16.73.177:9080/public/products/carrusel?carrusel=CARRUSEL1';
+      '/api/public/products/carrusel?carrusel=CARRUSEL1';
     const res = await axios.get(url, {
       crossDomain: true,
     });

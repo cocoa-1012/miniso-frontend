@@ -135,19 +135,3 @@
     justify-content: right;
   }
 }
-
-/* @media only screen and (max-width: 898px) {
-  .link {
-    display: none;
-  }
-} */
-.link:nth-child(1) {
-  /* font-size: 14px; */
-  display: none;
-}
-@media only screen and (min-width: 460px) {
-  .link:nth-child(1) {
-    /* font-size: 14px; */
-    display: block;
-  }
-}

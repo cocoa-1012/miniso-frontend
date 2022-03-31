@@ -17,6 +17,8 @@ const Products = ({ cat, filters, sort }) => {
         cat
           ? `http://3.16.73.177:9080/public/products/size/12/page/${currentPage}?category=${cat}`
           : 'http://3.16.73.177:9080/public/products/size/12/page/0?category=01',
+        //   ? `/api/public/products/size/12/page/${currentPage}?category=${cat}`
+        //   : '/api/public/products/size/12/page/0?category=01',
         {
           crossDomain: true,
         }

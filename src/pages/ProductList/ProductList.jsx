@@ -54,6 +54,7 @@ const ProductList = () => {
 
   const getCategories = useCallback(async () => {
     const catUrl = 'http://3.16.73.177:9080/public/categories/first';
+    // const catUrl = '/api/public/categories/first';
     const res = await axios.get(catUrl, {
       crossDomain: true,
     });
@@ -64,10 +65,11 @@ const ProductList = () => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
-
+  const image =
+    'https://minisobbs.s3.us-east-2.amazonaws.com/Zoho-admin/Accesorios-de-belleza.png';
   return (
     <>
-      <ProductsBanner />
+      <ProductsBanner image={image} />
       <Container>
         <Contenitrice>
           <Wrapper>

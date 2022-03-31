@@ -1,81 +1,85 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const cartQty = localStorage.getItem('cartQty');
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     products: [],
-    quantity: cartQty ? cartQty : 0,
+    quantity: 0,
     total: 0,
   },
   reducers: {
     addProduct: (state, action) => {
-      let producto = action.payload.productosPkDto.codInt;
-      let barra = action.payload.productosPkDto.barra;
-      let cantidad = parseInt(action.payload.quantity);
-
-      const addIt = PostAddProduct(producto, barra, cantidad);
-      if (addIt) {
-        state.quantity = parseInt(state.quantity) + cantidad;
-        state.products.push(cantidad);
-        state.total += action.payload.precio * cantidad;
+      const find = state.products.find(
+        (pr) =>
+          pr.productosPkDto.codInt === action.payload.productosPkDto.codInt
+      );
+      if (find && Object.keys(find).length !== 0) {
+        find.amount += action.payload.amount;
+      } else {
+        state.products.push(action.payload);
       }
+
+      const quantity = state.products
+        .map((item) => {
+          return item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+      const total = state.products
+        .map((item) => {
+          return item.precio * item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+
+      state.quantity = quantity;
+      state.total = total;
     },
 
     removeProduct: (state, action) => {
-      let producto = action.payload.codigo;
-      let barra = action.payload.barra;
+      const codInt = action.payload.codInt;
+      const barra = action.payload.barra;
 
-      const removeIt = PostAddProduct(producto, barra, 0);
+      const newProducts = state.products.filter((product) => {
+        const { productosPkDto } = product;
+        if (productosPkDto.codInt === codInt && productosPkDto.barra === barra)
+          return false;
+        return true;
+      });
+      state.products = newProducts;
+      const quantity = state.products
+        .map((item) => {
+          return item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+      const total = state.products
+        .map((item) => {
+          return item.precio * item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
 
-      if (removeIt) {
-        state.quantity = 0;
-        state.products.push(0);
-        state.total += 0;
-      }
+      state.quantity = quantity;
+      state.total = total;
     },
 
     updateCart: (state, action) => {
-      state.quantity = action.payload.quantity;
+      const products = action.payload;
+      state.products = products;
+      const quantity = state.products
+        .map((item) => {
+          return item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+      const total = state.products
+        .map((item) => {
+          return item.precio * item.amount;
+        })
+        .reduce((acc, curr) => acc + curr, 0);
+
+      state.quantity = quantity;
+      state.total = total;
     },
   },
 });
 
-const PostAddProduct = async (producto, barra, cantidad) => {
-  let itWasAdded = false;
-  let username = localStorage.getItem('username');
-  let token = JSON.parse(localStorage.getItem('user')).access_token;
-  let api = `http://3.16.73.177:9080/private/cart/add?userName=${username}`;
-  let reqData = {
-    codInt: producto,
-    barra: barra,
-    cantidad: cantidad,
-  };
+export const { addProduct, updateCart, removeProduct } = cartSlice.actions;
 
-  try {
-    const response = axios({
-      method: 'post',
-      url: api,
-      widthCredentials: true,
-      crossdomain: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: reqData,
-    });
-    if (response) {
-      itWasAdded = true;
-    }
-  } catch (error) {
-    console.log('....' + error.message);
-  }
-
-  return itWasAdded;
-};
-
-export const { addProduct } = cartSlice.actions;
-export const { removeProduct } = cartSlice.actions;
-export const { updateCart } = cartSlice.actions;
 export default cartSlice.reducer;

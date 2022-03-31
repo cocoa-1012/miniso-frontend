@@ -2,6 +2,7 @@
   "name": "miniso_gt2",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://3.16.73.177:9080/",
   "dependencies": {
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11.5.0",

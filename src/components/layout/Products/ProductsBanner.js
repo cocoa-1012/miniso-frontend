@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 const images = [
@@ -15,30 +15,22 @@ const images = [
 ];
 
 const BannerWrapper = styled.div`
-  height: 500px;
-  background: ${(props) =>
-    'linear-gradient(#00000037, #00000037), linear-gradient(#00000037, #00000037), url(' +
-    props.image +
-    ')'};
+  height: 100vh;
+  background: ${(props) => 'url(' + props.image + ')'};
   display: flex;
   justify-content: center;
   align-items: center;
   background-size: cover;
-  background-position: bottom center;
+  background-position: center center;
 `;
 
-const ProductsBanner = () => {
-  const [image, setImage] = useState(images[0]);
+const ProductsBanner = ({ image }) => {
   const { category } = useParams();
   useEffect(() => {
     const no = Math.floor(Math.random() * images.length);
-    setImage(images[no]);
+    console.log(images[no]);
   }, [category]);
-  return (
-    <BannerWrapper image={image} className=''>
-      <h2 style={{ color: '#fff', fontSize: 42 }}>Banner Title</h2>
-    </BannerWrapper>
-  );
+  return <BannerWrapper image={image} className=''></BannerWrapper>;
 };
 
 export default ProductsBanner;

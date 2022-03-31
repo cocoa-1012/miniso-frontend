@@ -6,11 +6,27 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-//import { publicRequest } from "../../requestMethods";
-import { addProduct } from '../../redux/cartRedux';
+import { addProductToCart } from '../../redux/cartAction';
 import classes from './Product.module.css';
 //import sushi2 from "../../assets/card/sushi2.jpeg";
 //import sushi3 from "../../assets/card/sushi3.jpeg";
+// CHECK IF IMAGE EXISTS
+function checkIfImageExists(url, callback) {
+  const img = new Image();
+  img.src = url;
+
+  if (img.complete) {
+    callback(true);
+  } else {
+    img.onload = () => {
+      callback(true);
+    };
+
+    img.onerror = () => {
+      callback(false);
+    };
+  }
+}
 
 const Product = () => {
   const location = useLocation();
@@ -23,41 +39,50 @@ const Product = () => {
   const dispatch = useDispatch();
   const [thumbsRefList, setThumbsRefList] = React.useState([]);
   const [indexPhoto, setIndexPhoto] = useState(2);
+  const [photos, setPhotos] = useState([]);
 
-  const photos = [
-    `${product.url}-1.jpg`,
+  useEffect(() => {
+    const imageUrls = [
+      `${product.url}-1.jpg`,
+      `${product.url}-2.jpg`,
+      `${product.url}-3.jpg`,
+    ];
+    const filterImageList = imageUrls.filter((item) => {
+      try {
+        const img = new Image();
+        img.src = item;
+        if (img.complete) return true;
+        img.onload = () => {
+          return true;
+        };
 
-    `${product.url}-2.jpg`,
-    `${product.url}-3.jpg`,
+        img.onerror = () => {
+          return false;
+        };
+      } catch (error) {
+        return false;
+      }
+      return false;
+    });
+    setPhotos(filterImageList);
+  }, [product.url]);
 
-    /* sushi2,
-    sushi3,*/
-  ];
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await axios.get(
+          pk && barra
+            ? `http://3.16.73.177:9080/public/products/pk?codeInt=${pk}&barra=${barra}`
+            : // `/api/public/products/pk?codeInt=${pk}&barra=${barra}`
+              ''
+        );
 
-  const createRef = () => {
-    photos.push(React.createRef);
-    setThumbsRefList(photos);
-  };
-
-  useEffect(
-    () => {
-      const getProduct = async () => {
-        try {
-          const res = await axios.get(
-            pk && barra
-              ? `http://3.16.73.177:9080/public/products/pk?codeInt=${pk}&barra=${barra}`
-              : ''
-          );
-
-          setProduct(res.data.body);
-        } catch {}
-      };
-      getProduct();
-      setIndexPhoto(0);
-    },
-    [pk],
-    [barra]
-  );
+        setProduct(res.data.body);
+      } catch {}
+    };
+    getProduct();
+    setIndexPhoto(0);
+  }, [pk, barra]);
 
   /*  useEffect(() => {
     const getProduct = async () => {
@@ -75,12 +100,7 @@ const Product = () => {
 */
   const handleQuantity = (type) => {
     let qty = parseInt(quantity);
-    if (type === 'dec') {
-      setQuantity(qty - 1);
-    } else {
-      setQuantity(qty + 1);
-    }
-    localStorage.setItem('cartQty', qty);
+    setQuantity(type === 'dec' ? qty - 1 : qty + 1);
   };
 
   const handleTab = (index) => {
@@ -90,11 +110,12 @@ const Product = () => {
       images[i].className = images[i].className.replace('active', '');
     }
     images[index].className = 'active';
+    // USAGE
   };
 
   const handleClick = () => {
-    toast('Product added to cart');
-    dispatch(addProduct({ ...product, quantity }));
+    toast.success('Product added to cart');
+    dispatch(addProductToCart(product, quantity));
   };
 
   const componentDidMount = () => {
@@ -107,7 +128,7 @@ const Product = () => {
       <div className={classes.Contenitrice}>
         <div className={classes.Wrapper}>
           <div className={classes.ImgContainer}>
-            <img className={classes.Image} src={photos[indexPhoto]} />
+            <img className={classes.Image} src={photos[indexPhoto]} alt='' />
           </div>
           <div className={classes.InfoContainer}>
             <div className={classes.Row}>

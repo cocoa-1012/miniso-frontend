@@ -1,83 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import styled from "styled-components";
-import classes from "./ShopNow.module.css";
-import axios from "axios";
-import Products from "../components/layout/Products/Products";
-import Container from "@mui/material/Container";
-import { useHistory } from "react-router-dom";
-
-const Wrapper = styled.div`
-  padding: 20px;
-`;
-
-const Title = styled.h1`
-  font-weight: 300;
-  text-align: center;
-`;
-
-const Top = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-`;
-
-/*const TopText = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin: 0px 350px;
-`;*/
-
-const Sortby = styled.div`
-  width: 15%;
-`;
-
-const TopTexts = styled.div``;
-
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const Info = styled.div`
-  flex: 3;
-`;
-
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 55vh;
-`;
-
-const FilterContainer = styled.div`
-  justify-content: space-between;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-`;
-
-const Option = styled.option``;
-
-/*const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: black;
-  color: #ffffff;
-  font-weight: 600;
-  cursor: pointer;
-`;*/
+import Container from '@mui/material/Container';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import Products from '../components/layout/Products/Products';
+import classes from './ShopNow.module.css';
+import {
+  Bottom,
+  FilterContainer,
+  Info,
+  Option,
+  Select,
+  Sortby,
+  Summary,
+  Title,
+  Top,
+  TopTexts,
+  Wrapper,
+} from './styled/ShopNow.styled';
 
 const ShopNow = () => {
   const location = useLocation();
-  const cat = location.pathname.split("/")[2];
-  const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("newest");
+  const cat = location.pathname.split('/')[2];
+  const [filters] = useState({});
+  const [sort, setSort] = useState('newest');
   let history = useHistory();
 
   const handleFilters = async (event) => {
@@ -86,7 +32,7 @@ const ShopNow = () => {
       history.push(`/productoslista/${value}`);
       history.go(`/productoslista/${value}`);
     } catch (err) {
-      console.log("- - - - - err: ", err);
+      console.log('- - - - - err: ', err);
     }
     /*
       setFilters({
@@ -97,7 +43,8 @@ const ShopNow = () => {
   };
 
   const [categories, setCategories] = useState([]);
-  let catUrl = "http://3.16.73.177:9080/public/categories/first";
+  // let catUrl = "http://3.16.73.177:9080/public/categories/first";
+  let catUrl = '/api/public/categories/first';
 
   useEffect(() => {
     getCategories();
@@ -145,7 +92,6 @@ const ShopNow = () => {
             <h1>Filtros</h1>
             <FilterContainer>
               <Select value={cat} name='categoría' onChange={handleFilters}>
-                {" "}
                 {categories.map((category) => (
                   <Option value={category.codCatUno}>
                     {category.descripcion}
@@ -163,7 +109,7 @@ const ShopNow = () => {
             </FilterContainer>
           </Summary>
           <Info>
-            <Products cat={"04"} filters={filters} sort={sort} />
+            <Products cat={'04'} filters={filters} sort={sort} />
           </Info>
         </Bottom>
       </Wrapper>

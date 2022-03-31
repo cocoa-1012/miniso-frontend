@@ -1,5 +1,6 @@
-import React from "react";
-import classes from "./TheNew.module.css";
+import React from 'react';
+import StorePage from './Store/StorePage';
+import classes from './TheNew.module.css';
 
 const Stores = () => {
   return (
@@ -13,7 +14,8 @@ const Stores = () => {
           />
         </div>
       </div>
-      <h1>Tiendas</h1>
+
+      <StorePage />
     </section>
   );
 };
