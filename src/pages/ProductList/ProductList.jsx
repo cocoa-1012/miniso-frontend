@@ -20,6 +20,20 @@ import {
   Wrapper,
 } from './ProductList.styled';
 
+const imageBaseUrl = 'https://minisobbs.s3.us-east-2.amazonaws.com/Zoho-admin';
+
+const images = {
+  '01': imageBaseUrl + '/fragancias+-+banner.png',
+  '02': imageBaseUrl + '/cosmeticos+-+banner.png',
+  '03': imageBaseUrl + '/cuidado+-+banner.png',
+  '04': imageBaseUrl + '/accesorios-banner.png',
+  10: imageBaseUrl + '/vida+-+banner.png',
+  12: imageBaseUrl + '/libreria+-+banner.png',
+  13: imageBaseUrl + '/jueguetes+-+banner.png',
+  14: imageBaseUrl + '/electronicos-banner.png',
+  15: imageBaseUrl + '/textil+-+banner.png',
+  16: imageBaseUrl + '/bolsas+-+banner.png',
+};
 const ProductList = () => {
   const { category: cat } = useParams();
   useEffect(() => {
@@ -65,8 +79,10 @@ const ProductList = () => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
-  const image =
-    'https://minisobbs.s3.us-east-2.amazonaws.com/Zoho-admin/Accesorios-de-belleza.png';
+  const [image, setImage] = useState('');
+
+  useEffect(() => setImage(images[cat]), [cat]);
+
   return (
     <>
       <ProductsBanner image={image} />
