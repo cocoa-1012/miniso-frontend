@@ -72,11 +72,11 @@ const Drawer = () => {
 
             <ListItem>
               <ListItemText>
-                {' '}
                 {categories.map((cat) => (
                   <Link
                     to={`/productoslista/${cat.codCatUno}`}
                     className={classes.link}
+                    key={cat.codCatUno}
                   >
                     <CategoryItem>
                       <span>{cat.descripcion}</span>
