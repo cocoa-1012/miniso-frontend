@@ -1,6 +1,6 @@
 import React from 'react';
 import StoreCard from './StorePageCard';
-const StorePage = () => {
+const StorePage = ({ noTitle = false }) => {
   const stores = [
     {
       id: 1,
@@ -33,15 +33,17 @@ const StorePage = () => {
   return (
     <div style={{ backgroundColor: '#ebebeb', padding: '90px 0' }}>
       <div className='container'>
-        <h2
-          style={{
-            textAlign: 'center',
-            fontSize: '42px',
-            marginBottom: '70px',
-          }}
-        >
-          Tiendas
-        </h2>
+        {!noTitle && (
+          <h2
+            style={{
+              textAlign: 'center',
+              fontSize: '42px',
+              marginBottom: '70px',
+            }}
+          >
+            Tiendas
+          </h2>
+        )}
 
         <div className='row'>
           {stores.map((item) => (
