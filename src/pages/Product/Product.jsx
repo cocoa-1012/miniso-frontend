@@ -100,9 +100,13 @@ const Product = () => {
     index:index
   });
 */
-  const handleQuantity = (type) => {
-    let qty = parseInt(quantity);
-    setQuantity(type === 'dec' ? qty - 1 : qty + 1);
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+  const decreaseQuantity = () => {
+    if (quantity <= 1) return;
+    setQuantity((prev) => prev - 1);
   };
 
   const handleTab = (index) => {
@@ -166,13 +170,10 @@ const Product = () => {
                   style={{
                     cursor: 'pointer',
                   }}
-                  onClick={() => handleQuantity('dec')}
+                  onClick={decreaseQuantity}
                 />
                 <span className={classes.Amount}>{quantity}</span>
-                <Add
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleQuantity('inc')}
-                />
+                <Add style={{ cursor: 'pointer' }} onClick={increaseQuantity} />
               </div>
             </div>
             <div className={classes.Thumb} ref={thumbsRefList}>
