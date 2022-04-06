@@ -1,8 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
-
+import { addProductToCart } from '../../../redux/cartAction';
 const Product = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const addProduct = () => {
+    try {
+      dispatch(addProductToCart(item, 1));
+      toast.success('Product added successfully!');
+    } catch (error) {
+      toast.error('Product added failed!');
+    }
+  };
+
   const imagen = item.url
     ? item.url
     : '../../img/products/4509757451814-2.jpeg';
@@ -16,6 +29,9 @@ const Product = ({ item }) => {
       </Link>
       <Title>{item.descripcion}</Title>
       <Price>Q.{item.precio}</Price>
+
+      <Button onClick={addProduct}>Add To cart</Button>
+
       {/*<Button>Agregar a Carrito</Button>*/}
     </Contenitrice>
   );
@@ -117,12 +133,13 @@ const Price = styled.p`
   }
 `;
 
-/*const Button = styled.button`
-  padding: 1rem;
+const Button = styled.button`
+  padding: 0.5rem;
   font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
   margin: 1rem;
+  margin-top: 0;
   background-color: #e71425;
   color: #ffffff;
   border: 2px solid #e71425;
@@ -135,6 +152,6 @@ const Price = styled.p`
     color: #e71425;
     cursor: pointer;
   }
-`;*/
+`;
 
 export default Product;

@@ -111,7 +111,10 @@ const Products = ({ cat, filters, sort }) => {
             ))}
           </Contenitrice>
         </div>
-        <div className='ImpaginAzione'>
+        <div
+          className='ImpaginAzione'
+          style={{ marginTop: 50, marginBottom: 20 }}
+        >
           <CustomPagination
             handlePageChange={handlePageChange}
             page={currentPage}
