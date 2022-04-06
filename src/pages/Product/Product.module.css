@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Avenir-Heavy";
-  src: url("../../assets/font/Avenir-Heavy.otf");
+  font-family: 'Avenir-Heavy';
+  src: url('../../assets/font/Avenir-Heavy.otf');
 }
 
 .Contenitrice {
@@ -22,6 +22,7 @@
   min-width: 290px;
   overflow: hidden;
   margin: 25px;
+  transform: scale(1.15);
 }
 
 .Image {
@@ -111,7 +112,7 @@
 }
 
 .bTnProperty {
-  font-family: "Avenir-Heavy";
+  font-family: 'Avenir-Heavy';
   margin-top: 15px;
   width: 50%;
   padding: 0.5rem;
