@@ -5,19 +5,19 @@ import { useHistory, useParams } from 'react-router-dom';
 import Products from '../../components/layout/Products/Products';
 import ProductsBanner from '../../components/layout/Products/ProductsBanner';
 import {
-  Bottom,
-  Contenitrice,
-  FilterContainer,
-  FilterContainerResponsive,
-  Info,
-  Option,
-  Select1,
-  Select2,
-  Sortby,
-  Summary,
-  Top,
-  TopTexts,
-  Wrapper,
+    Bottom,
+    Contenitrice,
+    FilterContainer,
+    FilterContainerResponsive,
+    Info,
+    Option,
+    Select1,
+    Select2,
+    Sortby,
+    Summary,
+    Top,
+    TopTexts,
+    Wrapper
 } from './ProductList.styled';
 
 const imageBaseUrl = 'https://minisobbs.s3.us-east-2.amazonaws.com/Zoho-admin';

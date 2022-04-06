@@ -42,30 +42,32 @@ const Product = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    const imageUrls = [
-      `${product.url}-1.jpg`,
-      `${product.url}-2.jpg`,
-      `${product.url}-3.jpg`,
-    ];
-    const filterImageList = imageUrls.filter((item) => {
-      try {
-        const img = new Image();
-        img.src = item;
-        if (img.complete) return true;
-        img.onload = () => {
-          return true;
-        };
+    if (Object.keys(product).length > 0) {
+      const imageUrls = [
+        `${product.url}-1.jpg`,
+        `${product.url}-2.jpg`,
+        `${product.url}-3.jpg`,
+      ];
+      const filterImageList = imageUrls.filter((item) => {
+        try {
+          const img = new Image();
+          img.src = item;
+          if (img.complete) return true;
+          img.onload = () => {
+            return true;
+          };
 
-        img.onerror = () => {
+          img.onerror = () => {
+            return false;
+          };
+        } catch (error) {
           return false;
-        };
-      } catch (error) {
+        }
         return false;
-      }
-      return false;
-    });
-    setPhotos(filterImageList);
-  }, [product.url]);
+      });
+      setPhotos(filterImageList);
+    }
+  }, [product]);
 
   useEffect(() => {
     const getProduct = async () => {
