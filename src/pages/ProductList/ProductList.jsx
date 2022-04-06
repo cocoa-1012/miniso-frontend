@@ -40,10 +40,7 @@ const ProductList = () => {
   // eslint-disable-next-line no-unused-vars
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState('newest');
-  let history = useHistory();
-  useEffect(() => {
-    console.log({ cat });
-  }, [cat]);
+  const history = useHistory();
 
   const handleFilters = async (event) => {
     const value = event.target.value;

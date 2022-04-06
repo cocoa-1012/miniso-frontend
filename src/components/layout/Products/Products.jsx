@@ -129,43 +129,43 @@ const Contenitrice = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 11rem));
   gap: 1.3rem;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 
   @media only screen and (max-width: 1920px) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 11rem));
     gap: 1.3rem;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media only screen and (max-width: 1150px) {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 15rem));
     gap: 0.5rem;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media only screen and (max-width: 1056px) {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 13rem));
     gap: 0.5rem;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media only screen and (max-width: 960px) {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 10rem));
     gap: 0.5rem;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media only screen and (max-width: 960px) {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 10rem));
     gap: 0.5rem;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media only screen and (max-width: 905px) {
     grid-template-columns: repeat(auto-fit, minmax(12rem, 9rem));
     gap: 0.2rem;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media only screen and (max-width: 887px) {
