@@ -38,7 +38,7 @@ export class Confirm extends Component {
   };
 
   confirmPayment = async () => {
-    const { cardname, cardnumber, codigo, date } = this.props.values;
+    const { cardname, cardnumber, codigo, date, cuotas } = this.props.values;
 
     let username = localStorage.getItem('username');
     let token = JSON.parse(localStorage.getItem('user')).access_token;
@@ -54,6 +54,7 @@ export class Confirm extends Component {
         cvv: codigo,
         fechaExpira: date,
         ip: '192.168.211.88',
+        cuotas,
       },
     };
 

@@ -14,7 +14,7 @@ export class Form extends Component {
     facebook: '',
     twitter: '',
     github: '',
-    installment: 1,
+    cuotas: 1,
   };
 
   nextStep = () => {
@@ -40,9 +40,9 @@ export class Form extends Component {
       cardnumber,
       codigo,
       date,
-      installment /*name, email, phone, password, facebook, twitter, github*/,
+      cuotas /*name, email, phone, password, facebook, twitter, github*/,
     } = this.state;
-    const values = { cardname, cardnumber, codigo, date, installment };
+    const values = { cardname, cardnumber, codigo, date, cuotas };
 
     switch (step) {
       case 1:

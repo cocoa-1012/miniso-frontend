@@ -87,12 +87,14 @@ export class AccountSetup extends Component {
           />
         </div>
         <div className='form.group'>
-          <label htmlFor='date'>Payments Installment</label>
+          <label htmlFor='date'>
+            Elige tu cantidad de cuotas para pagar tus artículos
+          </label>
           <select
             class='form-select'
-            value={values.installment}
+            value={values.cuotas}
             aria-label='Default select example'
-            onChange={inputChange('installment')}
+            onChange={inputChange('cuotas')}
           >
             {installMents.map((item) => (
               <option value={item.value} key={Math.random()}>
