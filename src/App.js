@@ -78,6 +78,9 @@ const App = () => {
         <Route path='/tiendas'>
           <Stores />
         </Route>
+        <Route path='/viewstores'>
+          <Stores viewStore />
+        </Route>
         <Route path='/contactanos'>
           <ContactUs />
         </Route>

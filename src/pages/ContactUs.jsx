@@ -1,7 +1,6 @@
 import Container from '@mui/material/Container';
 import React from 'react';
 import classes from './ContactUs.module.css';
-import StorePage from './Store/StorePage';
 
 const ContactUs = () => {
   return (
@@ -32,7 +31,6 @@ const ContactUs = () => {
           </p>
         </div>
       </Container>
-      <StorePage noTitle />
     </div>
   );
 };
