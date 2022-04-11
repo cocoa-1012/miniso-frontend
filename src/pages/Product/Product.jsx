@@ -48,25 +48,14 @@ const Product = () => {
         `${product.url}-2.jpg`,
         `${product.url}-3.jpg`,
       ];
-      const filterImageList = imageUrls.filter((item) => {
-        try {
-          const img = new Image();
-          img.src = item;
-          if (img.complete) return true;
-          img.onload = () => {
-            return true;
-          };
 
-          img.onerror = () => {
-            return false;
-          };
-        } catch (error) {
-          return false;
-        }
-        return false;
+      imageUrls.forEach((image) => {
+        checkIfImageExists(image, (result) => {
+          if (result) return setPhotos((prev) => [...prev, image]);
+        });
       });
-      setPhotos(filterImageList);
     }
+    return () => {};
   }, [product]);
 
   useEffect(() => {
@@ -181,7 +170,7 @@ const Product = () => {
                 <img
                   src={img}
                   alt=''
-                  key={index}
+                  key={img}
                   onClick={() => handleTab(index)}
                 />
               ))}
