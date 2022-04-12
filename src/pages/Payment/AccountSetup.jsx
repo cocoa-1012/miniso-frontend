@@ -1,6 +1,37 @@
-import React, { Component } from "react";
-import "./Form.css";
+import React, { Component } from 'react';
+import './Form.css';
 //import axios from "axios";
+
+const installMents = [
+  {
+    value: 1,
+    text: 'Contado',
+  },
+  {
+    value: 3,
+    text: 'Tres cuotas',
+  },
+  {
+    value: 6,
+    text: 'Seis cuotas',
+  },
+  {
+    value: 10,
+    text: 'Diez cuotas',
+  },
+  {
+    value: 12,
+    text: 'Doce cuotas',
+  },
+  {
+    value: 18,
+    text: 'Dieciocho cuotas',
+  },
+  {
+    value: 24,
+    text: 'Veinticuatro cuotas',
+  },
+];
 
 export class AccountSetup extends Component {
   continue = (e) => {
@@ -20,7 +51,7 @@ export class AccountSetup extends Component {
             type='text'
             className='form-control'
             name='cardname'
-            onChange={inputChange("cardname")}
+            onChange={inputChange('cardname')}
             value={values.cardname}
           />
         </div>
@@ -30,7 +61,7 @@ export class AccountSetup extends Component {
             type='text'
             className='form-control'
             name='cardnumber'
-            onChange={inputChange("cardnumber")}
+            onChange={inputChange('cardnumber')}
             value={values.cardnumber}
           />
         </div>
@@ -40,7 +71,7 @@ export class AccountSetup extends Component {
             type='password'
             className='form-control'
             name='codigo'
-            onChange={inputChange("codigo")}
+            onChange={inputChange('codigo')}
             value={values.codigo}
           />
         </div>
@@ -51,10 +82,28 @@ export class AccountSetup extends Component {
             className='form-control'
             name='date'
             placeholder='mm/yy'
-            onChange={inputChange("date")}
+            onChange={inputChange('date')}
             value={values.date}
           />
         </div>
+        <div className='form.group'>
+          <label htmlFor='date'>
+            Elige tu cantidad de cuotas para pagar tus artículos
+          </label>
+          <select
+            class='form-select'
+            value={values.cuotas}
+            aria-label='Default select example'
+            onChange={inputChange('cuotas')}
+          >
+            {installMents.map((item) => (
+              <option value={item.value} key={Math.random()}>
+                {item.text}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <br />
         <div className='text-right'>
           <button className='bTnProperty' onClick={this.continue}>

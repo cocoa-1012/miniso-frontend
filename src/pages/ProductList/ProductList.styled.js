@@ -49,6 +49,7 @@ export const Info = styled.div`
 `;
 
 export const Summary = styled.div`
+  display: none;
   flex: 1;
   border: 0.5px solid lightgray;
   border-radius: 10px;
@@ -100,7 +101,7 @@ export const FilterContainer = styled.div`
 `;
 
 export const FilterContainerResponsive = styled.div`
-  display: none;
+  /* display: none; */
 
   @media only screen and (max-width: 887px) {
     display: flex;

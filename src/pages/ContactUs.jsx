@@ -1,6 +1,6 @@
-import React from "react";
-import classes from "./ContactUs.module.css";
-import Container from "@mui/material/Container";
+import Container from '@mui/material/Container';
+import React from 'react';
+import classes from './ContactUs.module.css';
 
 const ContactUs = () => {
   return (

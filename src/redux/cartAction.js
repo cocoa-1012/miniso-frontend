@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addProduct, removeProduct, updateCart } from './cartRedux';
+import { addProduct, clear, removeProduct, updateCart } from './cartRedux';
 export const addProductToCart = (product, quantity) => (dispatch) => {
   const { barra, codInt } = product.productosPkDto;
   let username = localStorage.getItem('username');
@@ -90,4 +90,7 @@ export const updateCartFromServer = (codInt, barra) => async (dispatch) => {
       });
       dispatch(updateCart(allProducts));
     });
+};
+export const clearCart = () => async (dispatch) => {
+  dispatch(clear());
 };

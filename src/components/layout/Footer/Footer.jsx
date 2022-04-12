@@ -21,25 +21,23 @@ const Footer = () => {
 
   return (
     <div>
-      <footer className='text-white py-4 bg-dark'>
-        <div className=''>
-          <div className='container text-left text-md-left'>
-            <div className='row'>
-              <div className='col-xl-4 col-lg-4 col-md-12 col-sm-12 mx-auto'>
-                <img className='logoFooter' src='/img/logo.png' alt='' />
-                <br />
-                <br />
-                <br />
-                {/*                <p className='paraGraph'>
-                  Miniso.com.gt Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Quaerat facere quae perferendis numquam
-                  natus consectetur ad corrupti adipisci eos, ducimus iure fugit
-                  delectus, accusantium commodi, error necessitatibus illum
-                  provident eaque?
-  </p>*/}
-              </div>
-              {/*END GRID COLUMN*/}
-              {/* <hr className="clearfix w-100 d-md-none" />
+      <footer className='text-white py-4 bg-dark mt-5'>
+        <div className='text-left text-md-left'>
+          <div className='row'>
+            <div className='col-xl-4 col-lg-4 col-md-12 col-sm-12 mx-auto'>
+              <img className='logoFooter' src='/img/logo.png' alt='' />
+              {/* <br />
+              <br />
+              <br />
+              <p className='paraGraph'>
+                Miniso.com.gt Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Quaerat facere quae perferendis numquam natus consectetur
+                ad corrupti adipisci eos, ducimus iure fugit delectus,
+                accusantium commodi, error necessitatibus illum provident eaque?
+              </p> */}
+            </div>
+            {/*END GRID COLUMN*/}
+            {/* <hr className="clearfix w-100 d-md-none" />
               <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12 mx-auto">
                 <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
                   Mapa del Sitio
@@ -53,41 +51,63 @@ const Footer = () => {
                   </li>
                 </ul>
               </div> */}
-              {/*END GRID COLUMN*/}
-              <hr className='clearfix w-100 d-md-none' />
-              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto '>
-                <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
-                  Categorías
-                </h5>
-                <ul className='category_list'>
-                  {categories.map((category) => (
-                    <li key={category.codCatUno}>
-                      <Link to={`/productoslista/${category.codCatUno}`}>
-                        {category.descripcion}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto contactDiv'>
-                <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
-                  Contacto
-                </h5>
-                <p className='hover-red'>
-                  <i className='fas fa-map-marker-alt me-3  '></i>16 calle 6-72
-                  zona 10 Centro Comercial La Estación Local N-L22 Primer Nivel.
-                </p>
-                <p className=' hover-red'>
-                  <i className='fas fa-envelope me-3'></i>
-                  hola@miniso.com.gt
-                </p>
-                <p className='hover-red'>
-                  <i className='fas fa-phone me-3 hover-red'></i> 2445-5689
-                </p>
-              </div>
-              {/*END GRID COLUMN*/}
-              <hr className='clearfix w-100 d-md-none' />
-              {/*              <div className='col-xl-2 col-lg-2 col-md-12 col-sm-12 mx-auto'>
+            {/*END GRID COLUMN*/}
+            <hr className='clearfix w-100 d-md-none' />
+            <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto '>
+              <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
+                Categorías
+              </h5>
+              <ul className='category_list'>
+                {categories.map((category) => (
+                  <li key={category.codCatUno}>
+                    <Link to={`/productoslista/${category.codCatUno}`}>
+                      {category.descripcion}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto contactDiv'>
+              <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
+                Contacto
+              </h5>
+              <p className='hover-red'>
+                <i className='fas fa-map-marker-alt me-3  '></i>16 calle 6-72
+                zona 10 Centro Comercial La Estación Local N-L22 Primer Nivel.
+              </p>
+              <p className=' hover-red'>
+                <i className='fas fa-envelope me-3'></i>
+                hola@miniso.com.gt
+              </p>
+              <p className='hover-red'>
+                <i className='fas fa-phone me-3 hover-red'></i> 2445-5689
+              </p>
+              <ul className='list-unstyled list-inline socialIcons'>
+                <li className='list-inline-item'>
+                  <a
+                    href='https://www.facebook.com/MinisoGt/'
+                    target='_blank'
+                    className='btn-floating btn-fb mx-1'
+                    rel='noreferrer'
+                  >
+                    <i className='fab fa-facebook-f socialMedia'></i>
+                  </a>
+                </li>
+                <li className='list-inline-item'>
+                  <a
+                    href='https://www.instagram.com/miniso.gt/?hl=en'
+                    target='_blank'
+                    className='btn-floating btn-fb mx-1'
+                    rel='noreferrer'
+                  >
+                    <i className='fab fa-instagram socialMedia'> </i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {/*END GRID COLUMN*/}
+            <hr className='clearfix w-100 d-md-none' />
+            {/*              <div className='col-xl-2 col-lg-2 col-md-12 col-sm-12 mx-auto'>
                 <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                   Mi Cuenta
                 </h5>
@@ -101,14 +121,14 @@ const Footer = () => {
                 </ul>
 </div>*/}
 
-              {/*END GRID COLUMN*/}
-            </div>
-            {/*END ROW*/}
+            {/*END GRID COLUMN*/}
           </div>
-          {/*END CONTAINER*/}
+          {/*END ROW*/}
+        </div>
+        {/*END CONTAINER*/}
 
-          {/*CALL TO ACTION*/}
-          {/*          <ul className='list-unstyled list-inline text-center py-2'>
+        {/*CALL TO ACTION*/}
+        {/*          <ul className='list-unstyled list-inline text-center py-2'>
             <li className='list-inline-item'>
               <h5 className='mb-1'>Regístrate Gratis</h5>
             </li>
@@ -118,42 +138,20 @@ const Footer = () => {
               </a>
             </li>
 </ul>*/}
-          {/*CALL TO ACTION*/}
+        {/*CALL TO ACTION*/}
 
-          {/*SOCIAL BUTTONS*/}
-          <ul className='list-unstyled list-inline text-center'>
-            <li className='list-inline-item'>
-              <a
-                href='https://www.facebook.com/MinisoGt/'
-                target='_blank'
-                className='btn-floating btn-fb mx-1'
-                rel='noreferrer'
-              >
-                <i className='fab fa-facebook-f socialMedia'></i>
-              </a>
-            </li>
-            <li className='list-inline-item'>
-              <a
-                href='https://www.instagram.com/miniso.gt/?hl=en'
-                target='_blank'
-                className='btn-floating btn-fb mx-1'
-                rel='noreferrer'
-              >
-                <i className='fab fa-instagram socialMedia'> </i>
-              </a>
-            </li>
-          </ul>
-          <hr />
-          {/*SOCIAL BUTTONS*/}
-          {/*COPYRIGHTS*/}
-          <br />
-          <br />
-          <h5 className='text-center'>
-            MINISO Guatemala Ⓒ {new Date().getFullYear()} Todos los derechos
-            reservados.
-          </h5>
-          {/*COPYRIGHTS*/}
-        </div>
+        {/*SOCIAL BUTTONS*/}
+
+        <hr />
+        {/*SOCIAL BUTTONS*/}
+        {/*COPYRIGHTS*/}
+
+        <h6 className='text-center' style={{ margin: 0, marginTop: 25 }}>
+          MINISO Guatemala Ⓒ {new Date().getFullYear()} Todos los derechos
+          reservados.
+        </h6>
+        {/*COPYRIGHTS*/}
+
         {/*END FIRST DIV*/}
       </footer>
     </div>

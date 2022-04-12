@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { clearCart } from '../../redux/cartAction';
 import './Confirm.css';
 import './Form.css';
 
@@ -19,9 +21,13 @@ export class Confirm extends Component {
       },
       () => {
         e.preventDefault();
-        this.confirmPayment().then(() => {
-          this.setState({ loading: false });
-        });
+        this.confirmPayment()
+          .then(() => {
+            this.setState({ loading: false });
+          })
+          .catch((e) => {
+            this.setState({ loading: false });
+          });
       }
     );
   };
@@ -32,17 +38,15 @@ export class Confirm extends Component {
   };
 
   confirmPayment = async () => {
-    const {
-      values: { cardname, cardnumber, codigo, date },
-    } = this.props;
+    const { cardname, cardnumber, codigo, date, cuotas } = this.props.values;
 
     let username = localStorage.getItem('username');
     let token = JSON.parse(localStorage.getItem('user')).access_token;
 
     var config = {
       method: 'post',
-      // url: `http://3.16.73.177:9080/private/cart/end?userName=${username}`,
-      url: `/api/private/cart/end?userName=${username}`,
+      url: `http://3.16.73.177:9080/private/cart/end?userName=${username}`,
+      //   url: `/api/private/cart/end?userName=${username}`,
       headers: { Authorization: `Bearer ${token}`, crossDomain: true },
       data: {
         nombre: cardname,
@@ -50,6 +54,7 @@ export class Confirm extends Component {
         cvv: codigo,
         fechaExpira: date,
         ip: '192.168.211.88',
+        cuotas,
       },
     };
 
@@ -60,11 +65,15 @@ export class Confirm extends Component {
       })
       .catch(function (error) {
         toast.error('Error al realizar el pago');
+        this.setState({
+          loading: false,
+        });
       });
 
     console.log(respuesta);
-    if (respuesta != undefined && respuesta.ok == true) {
+    if (respuesta && respuesta.ok) {
       this.props.nextStep();
+      this.props.clearCart();
     }
   };
 
@@ -124,4 +133,4 @@ export class Confirm extends Component {
   }
 }
 
-export default Confirm;
+export default connect(null, { clearCart })(Confirm);

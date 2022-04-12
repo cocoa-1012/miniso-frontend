@@ -42,30 +42,21 @@ const Product = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    const imageUrls = [
-      `${product.url}-1.jpg`,
-      `${product.url}-2.jpg`,
-      `${product.url}-3.jpg`,
-    ];
-    const filterImageList = imageUrls.filter((item) => {
-      try {
-        const img = new Image();
-        img.src = item;
-        if (img.complete) return true;
-        img.onload = () => {
-          return true;
-        };
+    if (Object.keys(product).length > 0) {
+      const imageUrls = [
+        `${product.url}-1.jpg`,
+        `${product.url}-2.jpg`,
+        `${product.url}-3.jpg`,
+      ];
 
-        img.onerror = () => {
-          return false;
-        };
-      } catch (error) {
-        return false;
-      }
-      return false;
-    });
-    setPhotos(filterImageList);
-  }, [product.url]);
+      imageUrls.forEach((image) => {
+        checkIfImageExists(image, (result) => {
+          if (result) return setPhotos((prev) => [...prev, image]);
+        });
+      });
+    }
+    return () => {};
+  }, [product]);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -98,9 +89,13 @@ const Product = () => {
     index:index
   });
 */
-  const handleQuantity = (type) => {
-    let qty = parseInt(quantity);
-    setQuantity(type === 'dec' ? qty - 1 : qty + 1);
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+  const decreaseQuantity = () => {
+    if (quantity <= 1) return;
+    setQuantity((prev) => prev - 1);
   };
 
   const handleTab = (index) => {
@@ -164,13 +159,10 @@ const Product = () => {
                   style={{
                     cursor: 'pointer',
                   }}
-                  onClick={() => handleQuantity('dec')}
+                  onClick={decreaseQuantity}
                 />
                 <span className={classes.Amount}>{quantity}</span>
-                <Add
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleQuantity('inc')}
-                />
+                <Add style={{ cursor: 'pointer' }} onClick={increaseQuantity} />
               </div>
             </div>
             <div className={classes.Thumb} ref={thumbsRefList}>
@@ -178,7 +170,7 @@ const Product = () => {
                 <img
                   src={img}
                   alt=''
-                  key={index}
+                  key={img}
                   onClick={() => handleTab(index)}
                 />
               ))}
