@@ -53,8 +53,8 @@ export class Confirm extends Component {
         numCart: cardnumber,
         cvv: codigo,
         fechaExpira: date,
-        ip: '192.168.211.88',
-        cuotas,
+        ip: '190.56.100.90',
+        cuota: cuotas,
       },
     };
 
