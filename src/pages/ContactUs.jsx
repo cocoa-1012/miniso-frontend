@@ -1,19 +1,21 @@
 import Container from '@mui/material/Container';
 import React from 'react';
+import ReactHelmet from '../components/Seo/ReactHelmet';
 import classes from './ContactUs.module.css';
 
 const ContactUs = () => {
   return (
     <div>
-      {/*      <div className={classes.TopheaderContainer}>
-             <div className={classes.ImgContainer}>
-         <img
+      {/* <div className={classes.TopheaderContainer}>
+        <div className={classes.ImgContainer}>
+          <img
             className={classes.Image}
             src='./img/section_images/Banner Web 1980x995 1 Lo Nuevo.png'
             alt=''
           />
-</div>
-      </div>*/}
+        </div>
+      </div> */}
+      <ReactHelmet title='contactanos' />
 
       <Container fixed>
         <div className={classes.Wrapper}>
