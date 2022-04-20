@@ -6,28 +6,23 @@ import classes from './ContactUs.module.css';
 const ContactUs = () => {
   return (
     <div>
-      {/* <div className={classes.TopheaderContainer}>
-        <div className={classes.ImgContainer}>
-          <img
-            className={classes.Image}
-            src='./img/section_images/Banner Web 1980x995 1 Lo Nuevo.png'
-            alt=''
-          />
-        </div>
-      </div> */}
       <ReactHelmet title='Options' />
 
       <Container fixed>
         <div className={classes.Wrapper}>
           <h1>Contáctanos</h1>
           <p>
-            16 calle 6-72 zona 10
+            Diagonal 6, 13-01 Zona 10
             <br />
-            Centro Comercial La Estación
+            Centro Comercial Oakland Mall
             <br />
-            Local N-L22 Primer Nivel.
+            Local 201 y 202 Segundo Nivel,
             <br />
-            2445-5689
+            Guatemala, Guatemala.
+            <br />
+            +502 2336-5701
+            <br />
+            +502 3760-2892
             <br />
             hola@miniso.com.gt
           </p>
