@@ -69,13 +69,6 @@ const Cart = () => {
             >
               <button className={classes.bTnProperty}>Seguir Comprando</button>
             </Link>
-            {/*<TopTexts>
-              <TopText>Canasta de compras(2)</TopText>
-              <TopText>Tu lista (0)</TopText>
-            </TopTexts>*/}
-            {/*<button className={classes.TopbTnRightProperty} type='filled'>
-              Pagar Ahora
-          </button>*/}
           </Top>
           <Bottom>
             <Info>
@@ -97,10 +90,6 @@ const Cart = () => {
                           <b>Barra: </b>
                           {product.productosPkDto.barra}
                         </BarraId>
-                        {/*<ProductColor color='black' />
-                      <ProductSize>
-                        <b>Size:</b>37.5
-              </ProductSize>*/}
                       </Details>
                     </ProductDetail>
                     <PriceDetail>
