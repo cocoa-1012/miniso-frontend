@@ -79,7 +79,7 @@ export class Confirm extends Component {
 
   render() {
     const {
-      values: { cardname, cardnumber, codigo, date },
+      values: { cardname, cardnumber, codigo, date, cuotas },
     } = this.props;
 
     return (
@@ -92,6 +92,7 @@ export class Confirm extends Component {
           <li class='list-group-item'>Numero de Tarjeta: {cardnumber}</li>
           <li class='list-group-item'>Código de Seguridad (CVV): {codigo}</li>
           <li class='list-group-item'>Fecha de Expiración: {date}</li>
+          <li class='list-group-item'>Payment Installment: {cuotas}</li>
           {/*<li class='list-group-item'>Name: {name}</li>
           <li class='list-group-item'>Email: {email} </li>
           <li class='list-group-item'>Phone Number: {phone}</li>

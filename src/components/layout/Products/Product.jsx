@@ -10,7 +10,7 @@ const Product = ({ item }) => {
   const addProduct = () => {
     try {
       dispatch(addProductToCart(item, 1));
-      toast.success('Product added successfully!');
+      toast.success('¡Producto agregado correctamente!');
     } catch (error) {
       toast.error('Product added failed!');
     }
@@ -30,7 +30,7 @@ const Product = ({ item }) => {
       <Title>{item.descripcion}</Title>
       <Price>Q.{item.precio}</Price>
 
-      <Button onClick={addProduct}>Add To cart</Button>
+      <Button onClick={addProduct}>Agregar a carrito</Button>
 
       {/*<Button>Agregar a Carrito</Button>*/}
     </Contenitrice>
