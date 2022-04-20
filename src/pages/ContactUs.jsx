@@ -15,7 +15,7 @@ const ContactUs = () => {
           />
         </div>
       </div> */}
-      <ReactHelmet title='contactanos' />
+      <ReactHelmet title='Options' />
 
       <Container fixed>
         <div className={classes.Wrapper}>
