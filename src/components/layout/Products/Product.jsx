@@ -122,6 +122,7 @@ const Price = styled.p`
   margin-bottom: 25px;
   font-weight: bold;
   font-size: 2rem;
+  color: #e71425;
 
   @media only screen and (max-width: 351px) {
     font-size: 1.2rem;
