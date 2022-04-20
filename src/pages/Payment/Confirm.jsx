@@ -15,6 +15,10 @@ export class Confirm extends Component {
   }
 
   continue = (e) => {
+    if (!this.props.isAuthenticated) {
+      toast.error('Please login first');
+      return;
+    }
     this.setState(
       {
         loading: true,
@@ -134,4 +138,8 @@ export class Confirm extends Component {
   }
 }
 
-export default connect(null, { clearCart })(Confirm);
+const mapStateToProps = (state) => {
+  return { isAuthenticated: state.user.isAuthenticated };
+};
+
+export default connect(mapStateToProps, { clearCart })(Confirm);

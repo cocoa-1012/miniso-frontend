@@ -2,6 +2,7 @@ import { Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   removeProductFromCart,
   updateCartFromServer,
@@ -141,9 +142,20 @@ const Cart = () => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>Q. {total}</SummaryItemPrice>
               </SummaryItem>
-              <Link to='/payment' className={classes.link2}>
-                <button className={classes.bTnProperty}>Comprar Ahora</button>
-              </Link>
+              {cartProductsList.lenght > 0 ? (
+                <Link to='/payment' className={classes.link2}>
+                  <button className={classes.bTnProperty}>Comprar Ahora</button>
+                </Link>
+              ) : (
+                <button
+                  className={classes.bTnProperty}
+                  onClick={() => {
+                    toast.error('Cart is empty');
+                  }}
+                >
+                  Comprar Ahora
+                </button>
+              )}
             </Summary>
           </Bottom>
         </Wrapper>

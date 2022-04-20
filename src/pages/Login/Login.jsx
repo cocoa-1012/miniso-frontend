@@ -1,12 +1,13 @@
+import jwtDecode from 'jwt-decode';
 import React, { useRef, useState } from 'react';
-import { withRouter } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'; // IF IS REACT-WEB
 import CheckButton from 'react-validation/build/button';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
+import { loginSuccess } from '../../redux/userRedux';
 import AuthService from '../../services/auth.service';
 import './Login.css';
-
 const required = (value) => {
   if (!value) {
     return (
@@ -17,7 +18,7 @@ const required = (value) => {
   }
 };
 
-const Login = (props) => {
+const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
   const history = useHistory();
@@ -25,6 +26,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const dispatch = useDispatch();
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -45,22 +47,22 @@ const Login = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
-        () => {
+      AuthService.login(username, password, (isOk, result) => {
+        if (isOk) {
           history.push('/profile');
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
 
-          setLoading(false);
-          setMessage(resMessage);
+          const user = jwtDecode(result.access_token);
+          dispatch(loginSuccess(user));
+          return;
         }
-      );
+        const resMessage =
+          result?.response?.data?.message ||
+          result?.message ||
+          result.toString();
+
+        setLoading(false);
+        setMessage(resMessage);
+      });
     } else {
       setLoading(false);
     }
@@ -137,4 +139,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

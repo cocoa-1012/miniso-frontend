@@ -1,13 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { addProductToCart } from '../../../redux/cartAction';
 const Product = ({ item }) => {
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   const addProduct = () => {
+    if (!isAuthenticated) {
+      toast.error('Please login first');
+      return;
+    }
     dispatch(addProductToCart(item, 1, toast));
   };
 

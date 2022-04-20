@@ -3,7 +3,7 @@ import { Add, Remove } from '@mui/icons-material';
 import { Container } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ReactHelmet from '../../components/Seo/ReactHelmet';
@@ -42,6 +42,8 @@ const Product = () => {
   const [indexPhoto, setIndexPhoto] = useState(2);
   const [photos, setPhotos] = useState([]);
 
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   useEffect(() => {
     if (Object.keys(product).length > 0) {
       const imageUrls = [
@@ -76,21 +78,6 @@ const Product = () => {
     setIndexPhoto(0);
   }, [pk, barra]);
 
-  /*  useEffect(() => {
-    const getProduct = async () => {
-      try {
-        const res = await publicRequest.get("/products/find/" + pk);
-        setProduct(res.data);
-      } catch {}
-    };
-    getProduct();
-  }, [id]);*/
-  /*
-  const state = (index) => ({
-    index:index
-  });
-*/
-
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
@@ -110,13 +97,12 @@ const Product = () => {
   };
 
   const handleClick = () => {
+    if (!isAuthenticated) {
+      toast.error('Please login first');
+      return;
+    }
     toast.success('Product added to cart');
     dispatch(addProductToCart(product, quantity));
-  };
-
-  const componentDidMount = () => {
-    const { index } = this.state;
-    thumbsRefList.current.children[index].className = 'active';
   };
 
   return (
