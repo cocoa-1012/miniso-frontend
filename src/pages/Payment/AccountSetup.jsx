@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Form.css';
 //import axios from "axios";
 
@@ -40,7 +41,7 @@ export class AccountSetup extends Component {
   };
 
   render() {
-    const { values, inputChange } = this.props;
+    const { values, inputChange, total } = this.props;
 
     return (
       <div className='form-container'>
@@ -96,11 +97,15 @@ export class AccountSetup extends Component {
             aria-label='Default select example'
             onChange={inputChange('cuotas')}
           >
-            {installMents.map((item) => (
-              <option value={item.value} key={Math.random()}>
-                {item.text}
-              </option>
-            ))}
+            {total > 1000 ? (
+              installMents.map((item) => (
+                <option value={item.value} key={Math.random()}>
+                  {item.text}
+                </option>
+              ))
+            ) : (
+              <option value='1'>Contado</option>
+            )}
           </select>
         </div>
 
@@ -114,5 +119,8 @@ export class AccountSetup extends Component {
     );
   }
 }
-
-export default AccountSetup;
+const mapStateToProps = (state) => {
+  const total = state.cart.total;
+  return { total };
+};
+export default connect(mapStateToProps)(AccountSetup);

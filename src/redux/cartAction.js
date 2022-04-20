@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addProduct, clear, removeProduct, updateCart } from './cartRedux';
-export const addProductToCart = (product, quantity) => (dispatch) => {
+export const addProductToCart = (product, quantity, toast) => (dispatch) => {
   const { barra, codInt } = product.productosPkDto;
   let username = localStorage.getItem('username');
   let token = JSON.parse(localStorage.getItem('user')).access_token;
@@ -24,9 +24,11 @@ export const addProductToCart = (product, quantity) => (dispatch) => {
   })
     .then(() => {
       dispatch(addProduct({ ...product, amount: quantity }));
+      toast.success('¡Producto agregado correctamente!');
     })
     .catch((error) => {
       console.log('....' + error.message);
+      toast.error('Product added failed!');
     });
 };
 

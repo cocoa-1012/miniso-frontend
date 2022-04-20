@@ -8,12 +8,7 @@ const Product = ({ item }) => {
   const dispatch = useDispatch();
 
   const addProduct = () => {
-    try {
-      dispatch(addProductToCart(item, 1));
-      toast.success('¡Producto agregado correctamente!');
-    } catch (error) {
-      toast.error('Product added failed!');
-    }
+    dispatch(addProductToCart(item, 1, toast));
   };
 
   const imagen = item.url
