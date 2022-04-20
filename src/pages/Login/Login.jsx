@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import "./Login.css";
-import AuthService from "../../services/auth.service";
-import { withRouter } from "react-router";
-import { Link } from "react-router-dom"; // IF IS REACT-WEB
+import React, { useRef, useState } from 'react';
+import { withRouter } from 'react-router';
+import { Link, useHistory } from 'react-router-dom'; // IF IS REACT-WEB
+import CheckButton from 'react-validation/build/button';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import AuthService from '../../services/auth.service';
+import './Login.css';
 
 const required = (value) => {
   if (!value) {
@@ -20,11 +20,11 @@ const required = (value) => {
 const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -39,7 +39,7 @@ const Login = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    setMessage("");
+    setMessage('');
     setLoading(true);
 
     form.current.validateAll();
@@ -47,8 +47,7 @@ const Login = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
-          props.history.push("/profile");
-          window.location.reload();
+          history.push('/profile');
         },
         (error) => {
           const resMessage =
@@ -121,11 +120,11 @@ const Login = (props) => {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          <CheckButton style={{ display: 'none' }} ref={checkBtn} />
         </Form>
         <div className='form-group'>
           <Link
-            to={{ pathname: "https://miniso.realizeservice.com/admin/" }}
+            to={{ pathname: 'https://miniso.realizeservice.com/admin/' }}
             target='_blank'
           >
             {/*<button className='bTnPropertyLogin btn-block btnstyles'>
