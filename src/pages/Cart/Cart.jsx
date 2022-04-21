@@ -131,19 +131,23 @@ const Cart = () => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>Q. {total}</SummaryItemPrice>
               </SummaryItem>
-              {cartProductsList.lenght > 0 ? (
+              {cartProductsList.length > 0 ? (
                 <Link to='/payment' className={classes.link2}>
                   <button className={classes.bTnProperty}>Comprar Ahora</button>
                 </Link>
               ) : (
-                <button
-                  className={classes.bTnProperty}
-                  onClick={() => {
-                    toast.error('Cart is empty');
-                  }}
-                >
-                  Comprar Ahora
-                </button>
+                <>
+                  <Link to='#' className={classes.link2}>
+                    <button
+                      className={classes.bTnProperty}
+                      onClick={() => {
+                        toast.error('Cart is empty');
+                      }}
+                    >
+                      Comprar Ahora
+                    </button>
+                  </Link>
+                </>
               )}
             </Summary>
           </Bottom>

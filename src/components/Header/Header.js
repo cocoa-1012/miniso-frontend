@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import classes from '../../FirstNavigation.module.css';
+import { clear } from '../../redux/cartRedux';
 import { loginSuccess } from '../../redux/userRedux';
 import AuthService from '../../services/auth.service';
 
@@ -22,6 +23,7 @@ const Header = () => {
     e.preventDefault();
     AuthService.logout();
     dispatch(loginSuccess({}));
+    dispatch(clear());
   };
   return (
     <div>
