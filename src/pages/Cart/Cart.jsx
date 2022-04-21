@@ -37,7 +37,7 @@ import {
 } from './Cart.styled';
 const Cart = () => {
   const { total } = useSelector((state) => state.cart);
-
+  const { isAuthenticated } = useSelector((state) => state.user);
   const cartProductsList = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
   let username = localStorage.getItem('username');
@@ -45,8 +45,10 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    dispatch(updateCartFromServer());
-  }, [dispatch]);
+    if (isAuthenticated) {
+      dispatch(updateCartFromServer());
+    }
+  }, [dispatch, isAuthenticated]);
 
   const handleClick = (codInt, barra) => {
     dispatch(removeProductFromCart(codInt, barra));
@@ -131,24 +133,29 @@ const Cart = () => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>Q. {total}</SummaryItemPrice>
               </SummaryItem>
-              {cartProductsList.length > 0 ? (
-                <Link to='/payment' className={classes.link2}>
-                  <button className={classes.bTnProperty}>Comprar Ahora</button>
-                </Link>
-              ) : (
-                <>
-                  <Link to='#' className={classes.link2}>
-                    <button
-                      className={classes.bTnProperty}
-                      onClick={() => {
-                        toast.error('Cart is empty');
-                      }}
-                    >
+
+              {isAuthenticated ? (
+                cartProductsList.length > 0 ? (
+                  <Link to='/payment' className={classes.link2}>
+                    <button className={classes.bTnProperty}>
                       Comprar Ahora
                     </button>
                   </Link>
-                </>
-              )}
+                ) : (
+                  <>
+                    <Link to='#' className={classes.link2}>
+                      <button
+                        className={classes.bTnProperty}
+                        onClick={() => {
+                          toast.error('Cart is empty');
+                        }}
+                      >
+                        Comprar Ahora
+                      </button>
+                    </Link>
+                  </>
+                )
+              ) : null}
             </Summary>
           </Bottom>
         </Wrapper>
