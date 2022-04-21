@@ -27,7 +27,7 @@ export const addProductToCart = (product, quantity, toast) => (dispatch) => {
       toast.success('¡Producto agregado correctamente!');
     })
     .catch((error) => {
-      console.log('....' + error.message);
+      console.log('....' + error?.message);
       toast.error('Product added failed!');
     });
 };
@@ -55,7 +55,7 @@ export const removeProductFromCart = (codInt, barra) => (dispatch) => {
   })
     .then(() => dispatch(removeProduct({ codInt, barra })))
     .catch((error) => {
-      console.log(error.response);
+      console.log(error?.response);
     });
 };
 export const updateCartFromServer = (codInt, barra) => async (dispatch) => {

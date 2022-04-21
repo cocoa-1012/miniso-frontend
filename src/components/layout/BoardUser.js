@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import React, { useEffect, useState } from 'react';
+import EventBus from '../common/EventBus';
+import UserService from '../services/user.service';
 
 const BoardUser = () => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
 
   useEffect(() => {
     UserService.getUserBoard().then(
@@ -13,16 +12,16 @@ const BoardUser = () => {
       },
       (error) => {
         const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+          (error?.response &&
+            error?.response.data &&
+            error?.response.data.message) ||
+          error?.message ||
+          error?.toString();
 
         setContent(_content);
 
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
+        if (error?.response && error?.response?.status === 401) {
+          EventBus.dispatch('logout');
         }
       }
     );
