@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Products from '../components/layout/Products/Products';
-import ReactHelmet from '../components/Seo/ReactHelmet';
 import classes from './ShopNow.module.css';
 import {
   Bottom,
@@ -60,7 +59,6 @@ const ShopNow = () => {
 
   return (
     <div>
-      <ReactHelmet title='Shop now' />
       <div className={classes.TopheaderContainer}>
         <div className={classes.ImgContainer}>
           <img

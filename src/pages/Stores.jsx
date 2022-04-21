@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactHelmet from '../components/Seo/ReactHelmet';
 import StorePage from './Store/StorePage';
 import classes from './TheNew.module.css';
 
 const Stores = ({ viewStore = false }) => {
   return (
     <section>
-      <ReactHelmet title={'Stores'} />
       {!viewStore && (
         <div className={classes.Container}>
           <div className={classes.ImgContainer}>

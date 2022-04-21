@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactHelmet from '../../Seo/ReactHelmet';
 // import AuthService from "../../../services/auth.service";
 import classes from './Profile.module.css';
 
@@ -9,7 +8,6 @@ const Profile = () => {
 
   return (
     <div className='container'>
-      <ReactHelmet title={'Profile'} />
       <h1 className={classes.Title}>Hola Bienvenido a Miniso</h1>
       {/*<header className='jumbotron'>
         <h3>

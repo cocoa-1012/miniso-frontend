@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ReactHelmet from '../../components/Seo/ReactHelmet';
 import { addProductToCart } from '../../redux/cartAction';
 import classes from './Product.module.css';
 //import sushi2 from "../../assets/card/sushi2.jpeg";
@@ -107,12 +106,6 @@ const Product = () => {
 
   return (
     <Container>
-      <ReactHelmet
-        title={product.descripcion}
-        description={product.descripcion}
-      >
-        <meta name='price' content={product.precio} />
-      </ReactHelmet>
       <div className={classes.Contenitrice}>
         <div className={classes.Wrapper}>
           <div className={classes.ImgContainer}>

@@ -1,13 +1,10 @@
 import Container from '@mui/material/Container';
 import React from 'react';
-import ReactHelmet from '../components/Seo/ReactHelmet';
 import classes from './ContactUs.module.css';
 
 const ContactUs = () => {
   return (
     <div>
-      <ReactHelmet title='Options' />
-
       <Container fixed>
         <div className={classes.Wrapper}>
           <h1>Contáctanos</h1>
