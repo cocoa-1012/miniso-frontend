@@ -3,46 +3,25 @@ import { Container } from '@mui/material';
 //MATERIAL-UI FIRSTNAVIGATIONBAR
 import Badge from '@mui/material/Badge';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   //Routes,
   Link,
 } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
-import EventBus from '../../common/EventBus';
 import classes from '../../FirstNavigation.module.css';
+import { loginSuccess } from '../../redux/userRedux';
 import AuthService from '../../services/auth.service';
 
 const Header = () => {
-  // const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  // const [showAdminBoard, setShowAdminBoard] = useState(false);
-  const [currentUsername, setCurrentUsername] = useState(undefined);
   const quantity = useSelector((state) => state.cart.quantity);
-
-  useEffect(() => {
-    const user = AuthService.getCurrentUsername();
-
-    if (user) {
-      setCurrentUsername(user);
-      //  setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      //  setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
-
-    EventBus.on('logout', () => {
-      logOut();
-    });
-
-    return () => {
-      EventBus.remove('logout');
-    };
-  }, []);
-
-  const logOut = () => {
+  const { currentUser, isAuthenticated } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const logOut = (e) => {
+    e.preventDefault();
     AuthService.logout();
-    //   setShowModeratorBoard(false);
-    //   setShowAdminBoard(false);
-    setCurrentUsername(undefined);
+    dispatch(loginSuccess({}));
   };
   return (
     <div>
@@ -54,26 +33,18 @@ const Header = () => {
               <div className={classes.left}>
                 <div className={classes.logo}>
                   <Link to='/'>
-                    <img
-                      src='/img/logo.png'
-                      alt='MINISO'
-                      /*height={55}
-                width={55}*/
-                    />
+                    <img src='/img/logo.png' alt='MINISO' />
                   </Link>
                 </div>
               </div>
-              <div className={classes.center}>
-                {/*<div className={classes.searchContainer}>
-          <input className={classes.input}></input>
-          <SearchIcon style={{ color: "gray", fontSize: 16 }} />
-</div>*/}
-              </div>
+              <div className={classes.center}></div>
               <div className={classes.right}>
-                {currentUsername ? (
+                {isAuthenticated ? (
                   <div className={classes.specialLinks}>
                     <Link to={'/profile'} className={classes.link}>
-                      <div className={classes.MenuItem}>{currentUsername}</div>
+                      <div className={classes.MenuItem}>
+                        {currentUser.user_name}
+                      </div>
                     </Link>
                     <div className={`nav-item ${classes.logoutButton}`}>
                       <Link
@@ -98,7 +69,7 @@ const Header = () => {
                 <Link to='/cart'>
                   <div className={classes.MenuItem}>
                     <Badge
-                      badgeContent={currentUsername ? quantity : 0}
+                      badgeContent={isAuthenticated ? quantity : 0}
                       color='error'
                     >
                       <ShoppingCartOutlinedIcon color='primary' />
