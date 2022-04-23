@@ -16,7 +16,7 @@ export class Confirm extends Component {
 
   continue = (e) => {
     if (!this.props.isAuthenticated) {
-      toast.error('Please login first');
+      toast.error('Para realizar una compra, Inicia Sesión primero');
       return;
     }
     this.setState(

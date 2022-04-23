@@ -10,7 +10,7 @@ const Product = ({ item }) => {
 
   const addProduct = () => {
     if (!isAuthenticated) {
-      toast.error('Please login first');
+      toast.error('Para realizar una compra, Inicia Sesión primero');
       return;
     }
     dispatch(addProductToCart(item, 1, toast));

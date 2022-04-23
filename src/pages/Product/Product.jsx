@@ -97,7 +97,7 @@ const Product = () => {
 
   const handleClick = () => {
     if (!isAuthenticated) {
-      toast.error('Please login first');
+      toast.error('Para realizar una compra, Inicia Sesión primero');
       return;
     }
     toast.success('Product added to cart');
