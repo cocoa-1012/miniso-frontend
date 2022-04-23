@@ -1,6 +1,6 @@
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 //import { Link } from "react-router-dom";
 import './Footer.css';
@@ -19,59 +19,57 @@ const Footer = () => {
   }, []);
   useEffect(() => fetchCategories(), [fetchCategories]);
 
+  const formateCategories = useMemo(() => {
+    const categoryLength = categories.length;
+    if (!categoryLength > 0) return [];
+    const divider = 3;
+    const divideValue = Math.ceil(categoryLength / divider);
+
+    const data = [];
+    for (let i = 1; i < divider + 1; i++) {
+      data.push(
+        categories.slice(i * divideValue - divideValue, i * divideValue)
+      );
+    }
+    return data;
+  }, [categories]);
+
   return (
     <div>
       <footer className='text-white py-4 bg-dark mt-5'>
         <div className='text-left text-md-left'>
           <div className='row'>
-            <div className='col-xl-4 col-lg-4 col-md-12 col-sm-12 mx-auto'>
+            <div
+              className='col-xl-2 col-lg-2 col-md-12 col-sm-12  '
+              style={{ overflow: 'hidden' }}
+            >
               <img className='logoFooter' src='/img/logo.png' alt='' />
-              {/* <br />
-              <br />
-              <br />
-              <p className='paraGraph'>
-                Miniso.com.gt Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Quaerat facere quae perferendis numquam natus consectetur
-                ad corrupti adipisci eos, ducimus iure fugit delectus,
-                accusantium commodi, error necessitatibus illum provident eaque?
-              </p> */}
             </div>
-            {/*END GRID COLUMN*/}
-            {/* <hr className="clearfix w-100 d-md-none" />
-              <div className="col-xl-2 col-lg-2 col-md-12 col-sm-12 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
-                  Mapa del Sitio
-                </h5>
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="#!">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 2</a>
-                  </li>
-                </ul>
-              </div> */}
-            {/*END GRID COLUMN*/}
+
             <hr className='clearfix w-100 d-md-none' />
-            <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto '>
+            <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 '>
               <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                 Categorías
               </h5>
-              <ul className='category_list'>
-                {categories.map((category) => (
-                  <li key={category.codCatUno}>
-                    <Link to={`/productoslista/${category.codCatUno}`}>
-                      {category.descripcion}
-                    </Link>
-                  </li>
+              <div className='d-flex justify-content-between'>
+                {formateCategories.map((items) => (
+                  <ul className='category_list'>
+                    {items.map((category) => (
+                      <li key={category.codCatUno}>
+                        <Link to={`/productoslista/${category.codCatUno}`}>
+                          {category.descripcion}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 ))}
-              </ul>
+              </div>
             </div>
-            <div className='col-xl-3 col-lg-3 col-md-12 col-sm-12 mx-auto contactDiv'>
+            <div className='col-xl-4 col-lg-4 col-md-12 col-sm-12  contactDiv'>
               <h5 className='font-weight-bold text-uppercase mt-3 mb-4'>
                 Contacto
               </h5>
-              <p className='hover-red'>
+              <p className='hover-red ' style={{ paddingRight: '5%' }}>
                 <i className='fas fa-map-marker-alt me-3  '></i> Diagonal 6,
                 13-01 Zona 10, Centro Comercial Oakland Mall Local 201 y 202
                 Segundo Nivel, Guatemala, Guatemala
@@ -80,12 +78,14 @@ const Footer = () => {
                 <i className='fas fa-envelope me-3'></i>
                 hola@miniso.com.gt
               </p>
-              <p className='hover-red'>
-                <i className='fas fa-phone me-3 hover-red'></i> +502 2336-5701
-              </p>
-              <p className='hover-red'>
-                <i className='fas fa-phone me-3 hover-red'></i> +502 3760-2892
-              </p>
+              <div className='d-flex gap-5'>
+                <p className='hover-red'>
+                  <i className='fas fa-phone me-3 hover-red'></i> +502 2336-5701
+                </p>
+                <p className='hover-red'>
+                  <i className='fas fa-phone me-3 hover-red'></i> +502 3760-2892
+                </p>
+              </div>
               <ul className='list-unstyled list-inline socialIcons'>
                 <li className='list-inline-item'>
                   <a
