@@ -96,7 +96,9 @@ export class Confirm extends Component {
           <li class='list-group-item'>Numero de Tarjeta: {cardnumber}</li>
           <li class='list-group-item'>Código de Seguridad (CVV): {codigo}</li>
           <li class='list-group-item'>Fecha de Expiración: {date}</li>
-          <li class='list-group-item'>Payment Installment: {cuotas}</li>
+          <li class='list-group-item'>
+            Cantidad de cuotas seleccionada: {cuotas}
+          </li>
           {/*<li class='list-group-item'>Name: {name}</li>
           <li class='list-group-item'>Email: {email} </li>
           <li class='list-group-item'>Phone Number: {phone}</li>
@@ -117,13 +119,13 @@ export class Confirm extends Component {
             <span className='spinner-border spinner-border-lg'></span>
           )}
         </div>
-        <div className='row'>
-          <div className='col-6'>
+        <div className='row justify-content-sm-between'>
+          <div className='col-12 col-sm-6'>
             <button className='btn2' onClick={this.back}>
               Atrás
             </button>
           </div>
-          <div className='col-6 confirmButton'>
+          <div className='col-12 col-sm-6 confirmButton d-sm-flex justify-content-sm-end '>
             <button
               className='btn1'
               onClick={this.continue}

@@ -1,16 +1,12 @@
 @font-face {
-  font-family: "Avenir-Medium";
-  src: url("../../assets/font/Avenir-Medium.otf");
-}
-
-.confirmButton {
-  padding-left: 140px;
+  font-family: 'Avenir-Medium';
+  src: url('../../assets/font/Avenir-Medium.otf');
 }
 
 .btn1:enabled {
   padding: 0.5rem;
   box-sizing: border-box;
-  font-family: "Avenir-Medium";
+  font-family: 'Avenir-Medium';
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -33,7 +29,7 @@
 .btn1:disabled {
   padding: 0.5rem;
   box-sizing: border-box;
-  font-family: "Avenir-Medium";
+  font-family: 'Avenir-Medium';
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;
@@ -47,7 +43,7 @@
 .btn2 {
   padding: 0.5rem;
   box-sizing: border-box;
-  font-family: "Avenir-Medium";
+  font-family: 'Avenir-Medium';
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1rem;

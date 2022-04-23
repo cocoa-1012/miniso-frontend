@@ -69,7 +69,7 @@ export class AccountSetup extends Component {
         <div className='form.group'>
           <label htmlFor='codigo'>Código de Seguridad (CVV)</label>
           <input
-            type='password'
+            type='text'
             className='form-control'
             name='codigo'
             onChange={inputChange('codigo')}
