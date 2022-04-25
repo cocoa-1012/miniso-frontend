@@ -2,18 +2,22 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import AddressForm from './AddressForm';
 import classes from './Profile.module.css';
-
+const dataShow = false;
 const Profile = () => {
   const [formShow, setFromShow] = useState(false);
   return (
     <div className='container'>
       <h1 className={classes.Title}>Hola Bienvenido a Miniso</h1>
-      <div className='text-center'>
-        <Button onClick={() => setFromShow((prev) => !prev)}>
-          Crear una Dirección
-        </Button>
-      </div>
-      {formShow && <AddressForm setFromShow={setFromShow} />}
+      {dataShow && (
+        <>
+          <div className='text-center'>
+            <Button onClick={() => setFromShow((prev) => !prev)}>
+              Crear una Dirección
+            </Button>
+          </div>
+          {formShow && <AddressForm setFromShow={setFromShow} />}
+        </>
+      )}
     </div>
   );
 };
