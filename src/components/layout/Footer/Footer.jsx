@@ -53,7 +53,7 @@ const Footer = () => {
               </h5>
               <div className='d-flex justify-content-between'>
                 {formateCategories.map((items) => (
-                  <ul className='category_list'>
+                  <ul className='category_list' key={Math.random()}>
                     {items.map((category) => (
                       <li key={category.codCatUno}>
                         <Link to={`/productoslista/${category.codCatUno}`}>
