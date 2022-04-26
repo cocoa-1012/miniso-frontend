@@ -1,21 +1,25 @@
 import { Container } from '@mui/material';
 import axios from 'axios';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import CustomPagination from '../Pagination/CustomPagination';
 import Product from './Product';
 
-const Products = ({ cat, filters, sort }) => {
+const Products = ({ cat, filters, filtersData, sort }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [formateProducts, setFormateProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
   const getProducts = useCallback(
     async (currentPage) => {
+      const filterDataTo = Object.entries(filtersData)
+        .filter(([key, value]) => !!value)
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
+      console.log(filterDataTo);
       const res = await axios.get(
         cat
-          ? `http://3.16.73.177:9080/public/products/size/15/page/${currentPage}?category=${cat}`
+          ? `http://3.16.73.177:9080/public/products/size/15/page/${currentPage}?category=${cat}&${filterDataTo}`
           : 'http://3.16.73.177:9080/public/products/size/15/page/0?category=01',
         //   ? `/api/public/products/size/12/page/${currentPage}?category=${cat}`
         //   : '/api/public/products/size/12/page/0?category=01',
@@ -25,7 +29,7 @@ const Products = ({ cat, filters, sort }) => {
       );
       setProducts(res.data.content);
     },
-    [cat]
+    [cat, filtersData]
   );
 
   useEffect(() => {
@@ -125,6 +129,8 @@ const Products = ({ cat, filters, sort }) => {
   );
 };
 
+export default memo(Products);
+
 const Contenitrice = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 11rem));
@@ -210,5 +216,3 @@ const Contenitrice = styled.div`
     justify-content: center;
   }
 `;
-
-export default Products;

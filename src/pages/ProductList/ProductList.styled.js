@@ -35,7 +35,7 @@ export const Top = styled.div`
 `;*/
 
 export const Sortby = styled.div`
-  width: 15%;
+  /* width: 15%; */
 `;
 
 export const TopTexts = styled.div``;
@@ -103,7 +103,7 @@ export const FilterContainer = styled.div`
 export const FilterContainerResponsive = styled.div`
   /* display: none; */
 
-  @media only screen and (max-width: 887px) {
+  /* @media only screen and (max-width: 887px) {
     display: flex;
     flex: 1;
     width: 50%;
@@ -112,117 +112,45 @@ export const FilterContainerResponsive = styled.div`
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 15px;
-  }
+  } */
 `;
 
 export const Select1 = styled.select`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 12px;
-
-  @media only screen and (max-width: 1920px) {
+  margin-bottom: 10px;
+  @media only screen and (min-width: 599px) {
+    margin-bottom: 0;
   }
 
-  @media only screen and (max-width: 1048px) {
-  }
-
-  @media only screen and (max-width: 960px) {
-  }
-
-  @media only screen and (max-width: 887px) {
-    width: 50%;
-    padding: 10px;
-    margin-bottom: 15px;
+  @media only screen and (min-width: 991px) {
     font-size: 12px;
-  }
-
-  @media only screen and (max-width: 778px) {
-  }
-
-  @media only screen and (max-width: 671px) {
-    max-width: 30%;
-    margin-left: 100px;
-    margin-bottom: 20px;
-    font-size: 9px;
-  }
-
-  @media only screen and (max-width: 599px) {
-    max-width: 30%;
-    margin-left: 50px;
-    margin-bottom: 20px;
-    font-size: 9px;
-  }
-
-  @media only screen and (max-width: 483px) {
-    max-width: 30%;
-    margin-left: 5px;
-    margin-bottom: 20px;
-    font-size: 9px;
   }
 `;
 export const Select2 = styled.select`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 12px;
+  margin-bottom: 32px;
+  font-size: 9px;
 
-  @media only screen and (max-width: 1920px) {
+  @media only screen and (min-width: 640px) {
+    margin-bottom: 0px;
   }
 
-  @media only screen and (max-width: 1048px) {
-  }
-
-  @media only screen and (max-width: 960px) {
-  }
-
-  @media only screen and (max-width: 887px) {
-    width: 100%;
-    margin-left: -100px;
-    margin-bottom: 25px;
-    font-size: 12px;
-  }
-
-  @media only screen and (max-width: 719px) {
-    width: 100%;
-    margin-left: -50px;
-    margin-bottom: 25px;
-    font-size: 12px;
-  }
-
-  @media only screen and (max-width: 671px) {
-    width: 100%;
-    margin-left: -140px;
-    margin-bottom: 30px;
+  @media only screen and (min-width: 671px) {
     font-size: 10px;
   }
 
-  @media only screen and (max-width: 599px) {
-    max-width: 100%;
-    margin-left: -100px;
-    margin-bottom: 30px;
-    font-size: 9px;
+  @media only screen and (min-width: 719px) {
+    font-size: 12px;
+  }
+  @media only screen and (min-width: 887px) {
+  }
+`;
+export const PriceInput = styled.input`
+  margin-bottom: 10px;
+  @media only screen and (min-width: 599px) {
+    margin-bottom: 0;
   }
 
-  @media only screen and (max-width: 483px) {
-    max-width: 100%;
-    margin-left: -80px;
-    margin-bottom: 32px;
-    font-size: 9px;
-  }
-
-  @media only screen and (max-width: 431px) {
-    max-width: 100%;
-    margin-left: -80px;
-    margin-bottom: 32px;
-    font-size: 9px;
-  }
-
-  @media only screen and (max-width: 351px) {
-    max-width: 100%;
-    margin-left: -80px;
-    margin-bottom: 32px;
-    font-size: 9px;
+  @media only screen and (min-width: 991px) {
+    font-size: 12px;
   }
 `;
 

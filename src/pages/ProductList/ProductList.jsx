@@ -10,8 +10,8 @@ import {
   FilterContainerResponsive,
   Info,
   Option,
+  PriceInput,
   Select1,
-  Select2,
   Sortby,
   Top,
   Wrapper,
@@ -38,7 +38,11 @@ const ProductList = () => {
   }, [cat]);
 
   // eslint-disable-next-line no-unused-vars
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({
+    minPrice: 0,
+    maxPrice: 0,
+    name: '',
+  });
   const [sort, setSort] = useState('newest');
   const history = useHistory();
 
@@ -86,39 +90,97 @@ const ProductList = () => {
             <br />
             <br />
             <p></p>
-            <Top>
+            <Top className='row gx-0 gx-sm-3'>
               {/*<TopButton>CONTINUE SHOPPING</TopButton>*/}
               {/* <TopTexts><TopText>No. Resultados</TopText></TopTexts> */}
-              <FilterContainerResponsive>
-                <Select1 value={cat} name='categoría' onChange={handleFilters}>
+
+              <FilterContainerResponsive className='col-12 col-sm-6 col-md-3 '>
+                <Select1
+                  value={cat}
+                  name='categoría'
+                  className='form-control'
+                  onChange={handleFilters}
+                >
                   {categories.map((category) => (
                     <Option value={category.codCatUno} key={category.codCatUno}>
                       {category.descripcion}
                     </Option>
                   ))}
                 </Select1>
-                {/*<Select name='size' onChange={handleFilters}>
-                <Option disabled>Size</Option>
-                <Option>XS</Option>
-                <Option>S</Option>
-                <Option>M</Option>
-                <Option>L</Option>
-                <Option>XL</Option>
-                </Select>*/}
               </FilterContainerResponsive>
-              <Sortby>
-                <Select2 onChange={(e) => setSort(e.target.value)}>
+              <div className='row col-12 col-sm-6 col-md-3 gx-0 gx-sm-2 mb-2 mb-sm-0'>
+                <div className='col-6'>
+                  <PriceInput
+                    type='number'
+                    name='minPrice'
+                    placeholder='min'
+                    className='form-control'
+                    value={filters.minPrice}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (parseInt(value) > 0) {
+                        setFilters((prev) => ({
+                          ...prev,
+                          minPrice: value,
+                        }));
+                      }
+                    }}
+                  />
+                </div>
+                <div className='col-6'>
+                  <PriceInput
+                    type='number'
+                    name='maxPrice'
+                    placeholder='max'
+                    className='form-control '
+                    value={filters.maxPrice}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      if (parseInt(value) > 0) {
+                        setFilters((prev) => ({
+                          ...prev,
+                          maxPrice: value,
+                        }));
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <div className='col-12 col-sm-6 mb-1 mb-sm-0 col-md-3 '>
+                <PriceInput
+                  type='text'
+                  placeholder='search...'
+                  className='form-control'
+                  value={filters.name}
+                  onChange={(e) => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      name: e.target.value.toUpperCase(),
+                    }));
+                  }}
+                />
+              </div>
+              <Sortby className='col-12 col-sm-6 col-md-3 '>
+                <Select1
+                  onChange={(e) => setSort(e.target.value)}
+                  className='form-control'
+                >
                   <Option value='newest'>Ordenar </Option>
                   <Option Option value='desc'>
                     Precio más alto
                   </Option>
                   <Option value='asc'>Precio más bajo</Option>
-                </Select2>
+                </Select1>
               </Sortby>
             </Top>
             <Bottom>
               <Info>
-                <Products cat={cat} filters={filters} sort={sort} />
+                <Products
+                  cat={cat}
+                  filters={{}}
+                  filtersData={filters}
+                  sort={sort}
+                />
               </Info>
             </Bottom>
           </Wrapper>
