@@ -174,28 +174,7 @@ const Register = (props) => {
                     validations={[required]}
                   />
                 </div>
-                <div className='form-group'>
-                  <label htmlFor='phone'>Número de Teléfono</label>
-                  <Input
-                    type='tel'
-                    className='form-control'
-                    name='phone'
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    validations={[required]}
-                  />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='address'>Dirección</label>
-                  <Input
-                    type='text'
-                    className='form-control'
-                    name='address'
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    validations={[required]}
-                  />
-                </div>
+
                 <div className='form-group'>
                   <label htmlFor='username'>Username</label>
                   <Input

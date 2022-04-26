@@ -17,8 +17,7 @@ export const Top = styled.div`
   padding-bottom: 20px;
 `;
 
-{
-  /*export const TopButton = styled.button`
+/*export const TopButton = styled.button`
   padding: 10px;
   font-family: inherit;
   font-weight: bold;
@@ -45,11 +44,11 @@ export const TopText = styled.span`
   cursor: pointer;
   margin: 0px 10px;
 `;*/
-}
 
 export const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 export const Info = styled.div`
   flex: 3;
@@ -59,11 +58,24 @@ export const Product = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: start;
+    border: 1px solid #0003;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const ProductDetail = styled.div`
   flex: 2;
   display: flex;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const Image = styled.img`
@@ -95,12 +107,20 @@ export const PriceDetail = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 500px) {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
 `;
 
 export const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  @media (max-width: 500px) {
+    margin: 0;
+  }
 `;
 
 export const ProductAmount = styled.div`

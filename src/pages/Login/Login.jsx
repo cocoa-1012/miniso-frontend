@@ -1,12 +1,13 @@
-import React, { useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import "./Login.css";
-import AuthService from "../../services/auth.service";
-import { withRouter } from "react-router";
-import { Link } from "react-router-dom"; // IF IS REACT-WEB
-
+import jwtDecode from 'jwt-decode';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom'; // IF IS REACT-WEB
+import CheckButton from 'react-validation/build/button';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import { loginSuccess } from '../../redux/userRedux';
+import AuthService from '../../services/auth.service';
+import './Login.css';
 const required = (value) => {
   if (!value) {
     return (
@@ -17,14 +18,15 @@ const required = (value) => {
   }
 };
 
-const Login = (props) => {
+const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
+  const dispatch = useDispatch();
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -39,29 +41,28 @@ const Login = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    setMessage("");
+    setMessage('');
     setLoading(true);
 
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
-        () => {
-          props.history.push("/profile");
-          window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+      AuthService.login(username, password, (isOk, result) => {
+        if (isOk) {
+          history.push('/profile');
 
-          setLoading(false);
-          setMessage(resMessage);
+          const user = jwtDecode(result.access_token);
+          dispatch(loginSuccess(user));
+          return;
         }
-      );
+        const resMessage =
+          result?.response?.data?.message ||
+          result?.message ||
+          result.toString();
+
+        setLoading(false);
+        setMessage(resMessage);
+      });
     } else {
       setLoading(false);
     }
@@ -121,11 +122,11 @@ const Login = (props) => {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          <CheckButton style={{ display: 'none' }} ref={checkBtn} />
         </Form>
         <div className='form-group'>
           <Link
-            to={{ pathname: "https://miniso.realizeservice.com/admin/" }}
+            to={{ pathname: 'https://miniso.realizeservice.com/admin/' }}
             target='_blank'
           >
             {/*<button className='bTnPropertyLogin btn-block btnstyles'>
@@ -138,4 +139,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

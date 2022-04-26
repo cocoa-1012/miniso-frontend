@@ -1,15 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import jwtDecode from 'jwt-decode';
+import React from 'react';
+import ReactDOM from 'react-dom';
 //import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store";
+import { Provider } from 'react-redux';
+import App from './App';
+import './index.css';
+import store from './redux/store';
+import { loginSuccess } from './redux/userRedux';
 
-import "./index.css";
-import App from "./App";
+const token = localStorage.getItem('token');
+
+if (token) {
+  const user = jwtDecode(token);
+  store.dispatch(loginSuccess(user));
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

@@ -6,6 +6,12 @@
   margin-bottom: 40px;
 }
 
+@media (max-width: 768px) {
+  .TrashIcon {
+    margin: 0;
+  }
+}
+
 .TrashIcon:hover {
   color: #000000;
   transition: 0.4s;

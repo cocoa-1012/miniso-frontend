@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Products from '../components/layout/Products/Products';
@@ -44,18 +44,18 @@ const ShopNow = () => {
 
   const [categories, setCategories] = useState([]);
   // let catUrl = "http://3.16.73.177:9080/public/categories/first";
-  let catUrl = '/api/public/categories/first';
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
-  const getCategories = async () => {
+  const getCategories = useCallback(async () => {
+    let catUrl = '/api/public/categories/first';
     const res = await axios.get(catUrl, {
       crossDomain: true,
     });
     setCategories(res.data.body);
-  };
+  }, []);
+
+  useEffect(() => {
+    getCategories();
+  }, [getCategories]);
 
   return (
     <div>

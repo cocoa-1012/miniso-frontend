@@ -31,24 +31,24 @@ const register = (
   });
 };
 
-const login = (username, password) => {
-  const grant_type = 'password';
-  localStorage.setItem('username', username);
+const login = async (username, password, cb) => {
+  try {
+    const grant_type = 'password';
+    localStorage.setItem('username', username);
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    },
-    auth: {
-      username: 'ReactMinisoApp',
-      password: 'R3@l1z3m1n1z0',
-    },
-    withCredentials: true,
-    crossDomain: true,
-  };
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      auth: {
+        username: 'ReactMinisoApp',
+        password: 'R3@l1z3m1n1z0',
+      },
+      withCredentials: true,
+      crossDomain: true,
+    };
 
-  return axios
-    .post(
+    const response = await axios.post(
       API_URL + '/oauth/token',
       //   "/api/oauth/token",
       $.param({
@@ -57,18 +57,21 @@ const login = (username, password) => {
         grant_type,
       }),
       config
-    )
-    .then((response) => {
-      if (response.data.access_token) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-
-      return response.data;
-    });
+    );
+    if (response.data.access_token) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', response.data.access_token);
+    }
+    cb(true, response.data);
+  } catch (error) {
+    cb(false, error);
+  }
 };
 
 const logout = () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
 };
 
 const getCurrentUser = () => {
