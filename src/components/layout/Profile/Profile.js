@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import AddressForm from './AddressForm';
+import OrderHistory from './OrderHistory';
 import classes from './Profile.module.css';
 const dataShow = false;
 const Profile = () => {
@@ -18,6 +19,7 @@ const Profile = () => {
           {formShow && <AddressForm setFromShow={setFromShow} />}
         </>
       )}
+      <OrderHistory />
     </div>
   );
 };
