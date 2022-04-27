@@ -94,10 +94,10 @@ export class Confirm extends Component {
             Nombre del titular de la tarjeta: {cardname}
           </li>
           <li class='list-group-item'>Numero de Tarjeta: {cardnumber}</li>
-          <li class='list-group-item'>Código de Seguridad (CVV): {codigo}</li>
+          <li class='list-group-item'>Código de Seguridad (CVV): ***</li>
           <li class='list-group-item'>Fecha de Expiración: {date}</li>
           <li class='list-group-item'>
-            Cantidad de cuotas seleccionada: {cuotas}
+            Cantidad de cuotas seleccionadas: {cuotas}
           </li>
           {/*<li class='list-group-item'>Name: {name}</li>
           <li class='list-group-item'>Email: {email} </li>
