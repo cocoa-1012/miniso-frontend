@@ -28,19 +28,15 @@ const OrderHistory = () => {
             <td>No. De Productions</td>
             <td>Clients</td>
             <td>Total</td>
-            <td></td>
           </tr>
           {orders.map((order) => (
             <tr key={order.id}>
               <td>#{order.id}</td>
               <td>{order.state}</td>
               <td>{moment(order.fecha).format('L')}</td>
-              <td>@fat</td>
-              <td>Jacob</td>
+              <td></td>
+              <td></td>
               <td>Q{order.granTotal}</td>
-              <td>
-                <i className='fas fa-eye'></i>
-              </td>
             </tr>
           ))}
         </tbody>
