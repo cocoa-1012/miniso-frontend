@@ -95,6 +95,7 @@ const ProductList = () => {
               {/* <TopTexts><TopText>No. Resultados</TopText></TopTexts> */}
 
               <FilterContainerResponsive className='col-12 col-sm-6 col-md-3 '>
+                <h6>Categories</h6>
                 <Select1
                   value={cat}
                   name='categoría'
@@ -110,6 +111,7 @@ const ProductList = () => {
               </FilterContainerResponsive>
               <div className='row col-12 col-sm-6 col-md-3 gx-0 gx-sm-2 mb-2 mb-sm-0'>
                 <div className='col-6'>
+                  <h6>Min Price</h6>
                   <PriceInput
                     type='number'
                     name='minPrice'
@@ -128,6 +130,7 @@ const ProductList = () => {
                   />
                 </div>
                 <div className='col-6'>
+                  <h6>Max Price</h6>
                   <PriceInput
                     type='number'
                     name='maxPrice'
@@ -147,6 +150,7 @@ const ProductList = () => {
                 </div>
               </div>
               <div className='col-12 col-sm-6 mb-1 mb-sm-0 col-md-3 '>
+                <h6>Search...</h6>
                 <PriceInput
                   type='text'
                   placeholder='search...'
@@ -161,6 +165,7 @@ const ProductList = () => {
                 />
               </div>
               <Sortby className='col-12 col-sm-6 col-md-3 '>
+                <h6>Sort By</h6>
                 <Select1
                   onChange={(e) => setSort(e.target.value)}
                   className='form-control'
