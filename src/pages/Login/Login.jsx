@@ -61,7 +61,7 @@ const Login = () => {
           result.toString();
 
         setLoading(false);
-        setMessage(resMessage);
+        setMessage("Credenciales incorrectas");
       });
     } else {
       setLoading(false);
